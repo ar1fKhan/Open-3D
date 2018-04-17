@@ -1,9 +1,10 @@
 // ----------------------------------------------------------------------------
-// -                        Open3D: www.open3d.org                            -
+// -                        Open3D: www.open-3d.org                            -
 // ----------------------------------------------------------------------------
 // The MIT License (MIT)
 //
-// Copyright (c) 2018 www.open3d.org
+// Copyright (c) 2018, Intel Visual Computing Lab
+// Copyright (c) 2018, Open3D community
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -42,12 +43,12 @@ bool ReadTriangleMesh(const std::string &filename, TriangleMesh &mesh);
 /// two parameters will be used. Otherwise they will be ignored.
 /// \return return true if the write function is successful, false otherwise.
 bool WriteTriangleMesh(const std::string &filename, const TriangleMesh &mesh,
-		bool write_ascii = false, bool compressed = false);
+        bool write_ascii = false, bool compressed = false);
 
 bool ReadTriangleMeshFromPLY(const std::string &filename, TriangleMesh &mesh);
 
 bool WriteTriangleMeshToPLY(const std::string &filename,
-		const TriangleMesh &mesh, bool write_ascii = false,
-		bool compressed = false);
+        const TriangleMesh &mesh, bool write_ascii = false,
+        bool compressed = false);
 
-}	// namespace three
+}   // namespace three

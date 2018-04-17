@@ -1,9 +1,10 @@
 // ----------------------------------------------------------------------------
-// -                        Open3D: www.open3d.org                            -
+// -                        Open3D: www.open-3d.org                            -
 // ----------------------------------------------------------------------------
 // The MIT License (MIT)
 //
-// Copyright (c) 2018 www.open3d.org
+// Copyright (c) 2018, Intel Visual Computing Lab
+// Copyright (c) 2018, Open3D community
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,27 +35,27 @@ namespace three {
 class VisualizerWithKeyCallback : public Visualizer
 {
 public:
-	typedef std::pair<int, std::function<bool(Visualizer *)>> KeyCallbackPair;
+    typedef std::pair<int, std::function<bool(Visualizer *)>> KeyCallbackPair;
 
 public:
-	VisualizerWithKeyCallback();
-	~VisualizerWithKeyCallback() override;
-	VisualizerWithKeyCallback(const VisualizerWithKeyCallback &) = delete;
-	VisualizerWithKeyCallback &operator=(const VisualizerWithKeyCallback &) = 
-			delete;
+    VisualizerWithKeyCallback();
+    ~VisualizerWithKeyCallback() override;
+    VisualizerWithKeyCallback(const VisualizerWithKeyCallback &) = delete;
+    VisualizerWithKeyCallback &operator=(const VisualizerWithKeyCallback &) =
+            delete;
 
 public:
-	void PrintVisualizerHelp() override;
-	void RegisterKeyCallback(int key, 
-			std::function<bool(Visualizer *)> callback);
+    void PrintVisualizerHelp() override;
+    void RegisterKeyCallback(int key,
+            std::function<bool(Visualizer *)> callback);
 
 protected:
-	void KeyPressCallback(GLFWwindow *window,
-			int key, int scancode, int action, int mods) override;
-	std::string PrintKeyToString(int key);
+    void KeyPressCallback(GLFWwindow *window,
+            int key, int scancode, int action, int mods) override;
+    std::string PrintKeyToString(int key);
 
 protected:
-	std::map<int, std::function<bool(Visualizer *)>> key_to_callback_;
+    std::map<int, std::function<bool(Visualizer *)>> key_to_callback_;
 };
 
-}	// namespace three
+}   // namespace three

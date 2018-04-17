@@ -1,9 +1,10 @@
 // ----------------------------------------------------------------------------
-// -                        Open3D: www.open3d.org                            -
+// -                        Open3D: www.open-3d.org                            -
 // ----------------------------------------------------------------------------
 // The MIT License (MIT)
 //
-// Copyright (c) 2018 www.open3d.org
+// Copyright (c) 2018, Intel Visual Computing Lab
+// Copyright (c) 2018, Open3D community
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,55 +34,55 @@
 namespace three {
 
 namespace glsl {
-	
+
 class PickingShader : public ShaderWrapper
 {
 public:
-	~PickingShader() override { Release(); }
+    ~PickingShader() override { Release(); }
 
 protected:
-	PickingShader(const std::string &name) : ShaderWrapper(name) { Compile(); }
-	
-protected:
-	bool Compile() final;
-	void Release() final;
-	bool BindGeometry(const Geometry &geometry, const RenderOption &option,
-			const ViewControl &view) final;
-	bool RenderGeometry(const Geometry &geometry, const RenderOption &option,
-			const ViewControl &view) final;
-	void UnbindGeometry() final;
+    PickingShader(const std::string &name) : ShaderWrapper(name) { Compile(); }
 
 protected:
-	virtual bool PrepareRendering(const Geometry &geometry,
-			const RenderOption &option, const ViewControl &view) = 0;
-	virtual bool PrepareBinding(const Geometry &geometry,
-			const RenderOption &option, const ViewControl &view,
-			std::vector<Eigen::Vector3f> &points,
-			std::vector<float> &indices) = 0;
+    bool Compile() final;
+    void Release() final;
+    bool BindGeometry(const Geometry &geometry, const RenderOption &option,
+            const ViewControl &view) final;
+    bool RenderGeometry(const Geometry &geometry, const RenderOption &option,
+            const ViewControl &view) final;
+    void UnbindGeometry() final;
 
 protected:
-	GLuint vertex_position_;
-	GLuint vertex_position_buffer_;
-	GLuint vertex_index_;
-	GLuint vertex_index_buffer_;
-	GLuint MVP_;
+    virtual bool PrepareRendering(const Geometry &geometry,
+            const RenderOption &option, const ViewControl &view) = 0;
+    virtual bool PrepareBinding(const Geometry &geometry,
+            const RenderOption &option, const ViewControl &view,
+            std::vector<Eigen::Vector3f> &points,
+            std::vector<float> &indices) = 0;
+
+protected:
+    GLuint vertex_position_;
+    GLuint vertex_position_buffer_;
+    GLuint vertex_index_;
+    GLuint vertex_index_buffer_;
+    GLuint MVP_;
 };
 
 class PickingShaderForPointCloud : public PickingShader
 {
 public:
-	PickingShaderForPointCloud() :
-			PickingShader("PickingShaderForPointCloud") {}
-	
+    PickingShaderForPointCloud() :
+            PickingShader("PickingShaderForPointCloud") {}
+
 protected:
-	bool PrepareRendering(const Geometry &geometry,
-			const RenderOption &option, const ViewControl &view) final;
-	bool PrepareBinding(const Geometry &geometry,
-			const RenderOption &option, const ViewControl &view,
-			std::vector<Eigen::Vector3f> &points,
-			std::vector<float> &indices) final;
+    bool PrepareRendering(const Geometry &geometry,
+            const RenderOption &option, const ViewControl &view) final;
+    bool PrepareBinding(const Geometry &geometry,
+            const RenderOption &option, const ViewControl &view,
+            std::vector<Eigen::Vector3f> &points,
+            std::vector<float> &indices) final;
 };
 
-}	// namespace three::glsl
+}   // namespace three::glsl
 
-}	// namespace three
+}   // namespace three

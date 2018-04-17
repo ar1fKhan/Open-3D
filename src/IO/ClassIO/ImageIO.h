@@ -1,9 +1,10 @@
 // ----------------------------------------------------------------------------
-// -                        Open3D: www.open3d.org                            -
+// -                        Open3D: www.open-3d.org                            -
 // ----------------------------------------------------------------------------
 // The MIT License (MIT)
 //
-// Copyright (c) 2018 www.open3d.org
+// Copyright (c) 2018, Intel Visual Computing Lab
+// Copyright (c) 2018, Open3D community
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -42,16 +43,16 @@ bool ReadImage(const std::string &filename, Image &image);
 /// Otherwise it will be ignored.
 /// \return return true if the write function is successful, false otherwise.
 bool WriteImage(const std::string &filename, const Image &image,
-		int quality = 90);
+        int quality = 90);
 
 bool ReadImageFromPNG(const std::string &filename, Image &image);
 
 bool WriteImageToPNG(const std::string &filename, const Image &image,
-		int quality);
+        int quality);
 
 bool ReadImageFromJPG(const std::string &filename, Image &image);
 
 bool WriteImageToJPG(const std::string &filename, const Image &image,
-		int quality = 90);
+        int quality = 90);
 
-}	// namespace three
+}   // namespace three

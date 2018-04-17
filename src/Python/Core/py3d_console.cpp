@@ -1,9 +1,10 @@
 // ----------------------------------------------------------------------------
-// -                        Open3D: www.open3d.org                            -
+// -                        Open3D: www.open-3d.org                            -
 // ----------------------------------------------------------------------------
 // The MIT License (MIT)
 //
-// Copyright (c) 2018 www.open3d.org
+// Copyright (c) 2018, Intel Visual Computing Lab
+// Copyright (c) 2018, Open3D community
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,16 +32,16 @@ using namespace three;
 
 void pybind_console(py::module &m)
 {
-	py::enum_<VerbosityLevel>(m, "VerbosityLevel", py::arithmetic())
-		.value("Error", VerbosityLevel::VerboseError)
-		.value("Warning", VerbosityLevel::VerboseWarning)
-		.value("Info", VerbosityLevel::VerboseInfo)
-		.value("Debug", VerbosityLevel::VerboseDebug)
-		.value("Always", VerbosityLevel::VerboseAlways)
-		.export_values();
-	m.def("set_verbosity_level", &SetVerbosityLevel,
-			"Set global verbosity level of Open3D (py3d)",
-			py::arg("verbosity_level"));
-	m.def("get_verbosity_level", &GetVerbosityLevel,
-			"Get global verbosity level of Open3D (py3d)");
+    py::enum_<VerbosityLevel>(m, "VerbosityLevel", py::arithmetic())
+        .value("Error", VerbosityLevel::VerboseError)
+        .value("Warning", VerbosityLevel::VerboseWarning)
+        .value("Info", VerbosityLevel::VerboseInfo)
+        .value("Debug", VerbosityLevel::VerboseDebug)
+        .value("Always", VerbosityLevel::VerboseAlways)
+        .export_values();
+    m.def("set_verbosity_level", &SetVerbosityLevel,
+            "Set global verbosity level of Open3D (py3d)",
+            py::arg("verbosity_level"));
+    m.def("get_verbosity_level", &GetVerbosityLevel,
+            "Get global verbosity level of Open3D (py3d)");
 }

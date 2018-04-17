@@ -1,9 +1,10 @@
 // ----------------------------------------------------------------------------
-// -                        Open3D: www.open3d.org                            -
+// -                        Open3D: www.open-3d.org                            -
 // ----------------------------------------------------------------------------
 // The MIT License (MIT)
 //
-// Copyright (c) 2018 www.open3d.org
+// Copyright (c) 2018, Intel Visual Computing Lab
+// Copyright (c) 2018, Open3D community
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -43,12 +44,12 @@ class RGBDImage;
 /// Function to estimate 6D odometry between two RGB-D images
 /// output: is_success, 4x4 motion matrix, 6x6 information matrix
 std::tuple<bool, Eigen::Matrix4d, Eigen::Matrix6d>
-		ComputeRGBDOdometry(const RGBDImage &source, const RGBDImage &target,
-		const PinholeCameraIntrinsic &pinhole_camera_intrinsic =
-		PinholeCameraIntrinsic(),
-		const Eigen::Matrix4d &odo_init = Eigen::Matrix4d::Identity(),
-		const RGBDOdometryJacobian &jacobian_method =
-		RGBDOdometryJacobianFromHybridTerm(),
-		const OdometryOption &option = OdometryOption());
+        ComputeRGBDOdometry(const RGBDImage &source, const RGBDImage &target,
+        const PinholeCameraIntrinsic &pinhole_camera_intrinsic =
+        PinholeCameraIntrinsic(),
+        const Eigen::Matrix4d &odo_init = Eigen::Matrix4d::Identity(),
+        const RGBDOdometryJacobian &jacobian_method =
+        RGBDOdometryJacobianFromHybridTerm(),
+        const OdometryOption &option = OdometryOption());
 
-}	// namespace three
+}   // namespace three

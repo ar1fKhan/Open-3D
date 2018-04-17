@@ -1,9 +1,10 @@
 // ----------------------------------------------------------------------------
-// -                        Open3D: www.open3d.org                            -
+// -                        Open3D: www.open-3d.org                            -
 // ----------------------------------------------------------------------------
 // The MIT License (MIT)
 //
-// Copyright (c) 2018 www.open3d.org
+// Copyright (c) 2018, Intel Visual Computing Lab
+// Copyright (c) 2018, Open3D community
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,20 +40,20 @@ class PointCloud;
 class PointCloudPicker : public Geometry3D
 {
 public:
-	PointCloudPicker() : Geometry3D(Geometry::GeometryType::Unspecified) {}
-	~PointCloudPicker() override {}
+    PointCloudPicker() : Geometry3D(Geometry::GeometryType::Unspecified) {}
+    ~PointCloudPicker() override {}
 
 public:
-	void Clear() override;
-	bool IsEmpty() const override;
-	Eigen::Vector3d GetMinBound() const final;
-	Eigen::Vector3d GetMaxBound() const final;
-	void Transform(const Eigen::Matrix4d & transformation) override;
-	bool SetPointCloud(std::shared_ptr<const Geometry> ptr);
+    void Clear() override;
+    bool IsEmpty() const override;
+    Eigen::Vector3d GetMinBound() const final;
+    Eigen::Vector3d GetMaxBound() const final;
+    void Transform(const Eigen::Matrix4d & transformation) override;
+    bool SetPointCloud(std::shared_ptr<const Geometry> ptr);
 
 public:
-	std::shared_ptr<const Geometry> pointcloud_ptr_;
-	std::vector<size_t> picked_indices_;
+    std::shared_ptr<const Geometry> pointcloud_ptr_;
+    std::vector<size_t> picked_indices_;
 };
 
-}	// namespace three
+}   // namespace three

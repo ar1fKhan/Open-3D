@@ -1,9 +1,10 @@
 // ----------------------------------------------------------------------------
-// -                        Open3D: www.open3d.org                            -
+// -                        Open3D: www.open-3d.org                            -
 // ----------------------------------------------------------------------------
 // The MIT License (MIT)
 //
-// Copyright (c) 2018 www.open3d.org
+// Copyright (c) 2018, Intel Visual Computing Lab
+// Copyright (c) 2018, Open3D community
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -41,40 +42,40 @@ class GlobalOptimizationOption;
 class GlobalOptimizationMethod
 {
 public:
-	GlobalOptimizationMethod() {}
-	virtual ~GlobalOptimizationMethod() {}
+    GlobalOptimizationMethod() {}
+    virtual ~GlobalOptimizationMethod() {}
 
 public:
-	virtual void OptimizePoseGraph(
-			PoseGraph &pose_graph,
-			const GlobalOptimizationConvergenceCriteria &criteria,
-			const GlobalOptimizationOption &option) const = 0;
+    virtual void OptimizePoseGraph(
+            PoseGraph &pose_graph,
+            const GlobalOptimizationConvergenceCriteria &criteria,
+            const GlobalOptimizationOption &option) const = 0;
 };
 
 class GlobalOptimizationGaussNewton : public GlobalOptimizationMethod
 {
 public:
-	GlobalOptimizationGaussNewton() {}
-	~GlobalOptimizationGaussNewton() override {}
+    GlobalOptimizationGaussNewton() {}
+    ~GlobalOptimizationGaussNewton() override {}
 
 public:
-	void OptimizePoseGraph(
-			PoseGraph &pose_graph,
-			const GlobalOptimizationConvergenceCriteria &criteria,
-			const GlobalOptimizationOption &option) const override;
+    void OptimizePoseGraph(
+            PoseGraph &pose_graph,
+            const GlobalOptimizationConvergenceCriteria &criteria,
+            const GlobalOptimizationOption &option) const override;
 };
 
 class GlobalOptimizationLevenbergMarquardt : public GlobalOptimizationMethod
 {
 public:
-	GlobalOptimizationLevenbergMarquardt() {}
-	~GlobalOptimizationLevenbergMarquardt() override {}
+    GlobalOptimizationLevenbergMarquardt() {}
+    ~GlobalOptimizationLevenbergMarquardt() override {}
 
 public:
-	void OptimizePoseGraph(
-			PoseGraph &pose_graph,
-			const GlobalOptimizationConvergenceCriteria &criteria,
-			const GlobalOptimizationOption &option) const override;
+    void OptimizePoseGraph(
+            PoseGraph &pose_graph,
+            const GlobalOptimizationConvergenceCriteria &criteria,
+            const GlobalOptimizationOption &option) const override;
 };
 
-}	// namespace three
+}   // namespace three

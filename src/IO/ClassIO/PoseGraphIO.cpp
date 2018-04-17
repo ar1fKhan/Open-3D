@@ -1,9 +1,10 @@
 // ----------------------------------------------------------------------------
-// -                        Open3D: www.open3d.org                            -
+// -                        Open3D: www.open-3d.org                            -
 // ----------------------------------------------------------------------------
 // The MIT License (MIT)
 //
-// Copyright (c) 2018 www.open3d.org
+// Copyright (c) 2018, Intel Visual Computing Lab
+// Copyright (c) 2018, Open3D community
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,66 +37,66 @@ namespace three{
 namespace {
 
 bool ReadPoseGraphFromJSON(const std::string &filename,
-		PoseGraph &pose_graph)
+        PoseGraph &pose_graph)
 {
-	return ReadIJsonConvertible(filename, pose_graph);
+    return ReadIJsonConvertible(filename, pose_graph);
 }
 
 bool WritePoseGraphToJSON(const std::string &filename,
-		const PoseGraph &pose_graph)
+        const PoseGraph &pose_graph)
 {
-	return WriteIJsonConvertibleToJSON(filename, pose_graph);
+    return WriteIJsonConvertibleToJSON(filename, pose_graph);
 }
 
 static const std::unordered_map<std::string,
-		std::function<bool(const std::string &, PoseGraph &)>>
-		file_extension_to_pose_graph_read_function
-		{{"json", ReadPoseGraphFromJSON},
-		};
+        std::function<bool(const std::string &, PoseGraph &)>>
+        file_extension_to_pose_graph_read_function
+        {{"json", ReadPoseGraphFromJSON},
+        };
 
 static const std::unordered_map<std::string,
-		std::function<bool(const std::string &,
-		const PoseGraph &)>>
-		file_extension_to_pose_graph_write_function
-		{{"json", WritePoseGraphToJSON},
-		};
+        std::function<bool(const std::string &,
+        const PoseGraph &)>>
+        file_extension_to_pose_graph_write_function
+        {{"json", WritePoseGraphToJSON},
+        };
 
-}	// unnamed namespace
+}   // unnamed namespace
 
 bool ReadPoseGraph(const std::string &filename,
-		PoseGraph &pose_graph)
+        PoseGraph &pose_graph)
 {
-	std::string filename_ext =
-			filesystem::GetFileExtensionInLowerCase(filename);
-	if (filename_ext.empty()) {
-		PrintWarning("Read PoseGraph failed: unknown file extension.\n");
-		return false;
-	}
-	auto map_itr =
-			file_extension_to_pose_graph_read_function.find(filename_ext);
-	if (map_itr == file_extension_to_pose_graph_read_function.end()) {
-		PrintWarning("Read PoseGraph failed: unknown file extension.\n");
-		return false;
-	}
-	return map_itr->second(filename, pose_graph);
+    std::string filename_ext =
+            filesystem::GetFileExtensionInLowerCase(filename);
+    if (filename_ext.empty()) {
+        PrintWarning("Read PoseGraph failed: unknown file extension.\n");
+        return false;
+    }
+    auto map_itr =
+            file_extension_to_pose_graph_read_function.find(filename_ext);
+    if (map_itr == file_extension_to_pose_graph_read_function.end()) {
+        PrintWarning("Read PoseGraph failed: unknown file extension.\n");
+        return false;
+    }
+    return map_itr->second(filename, pose_graph);
 }
 
 bool WritePoseGraph(const std::string &filename,
-		const PoseGraph &pose_graph)
+        const PoseGraph &pose_graph)
 {
-	std::string filename_ext =
-			filesystem::GetFileExtensionInLowerCase(filename);
-	if (filename_ext.empty()) {
-		PrintWarning("Write PoseGraph failed: unknown file extension.\n");
-		return false;
-	}
-	auto map_itr =
-			file_extension_to_pose_graph_write_function.find(filename_ext);
-	if (map_itr == file_extension_to_pose_graph_write_function.end()) {
-		PrintWarning("Write PoseGraph failed: unknown file extension.\n");
-		return false;
-	}
-	return map_itr->second(filename, pose_graph);
+    std::string filename_ext =
+            filesystem::GetFileExtensionInLowerCase(filename);
+    if (filename_ext.empty()) {
+        PrintWarning("Write PoseGraph failed: unknown file extension.\n");
+        return false;
+    }
+    auto map_itr =
+            file_extension_to_pose_graph_write_function.find(filename_ext);
+    if (map_itr == file_extension_to_pose_graph_write_function.end()) {
+        PrintWarning("Write PoseGraph failed: unknown file extension.\n");
+        return false;
+    }
+    return map_itr->second(filename, pose_graph);
 }
 
-}	// namespace three
+}   // namespace three

@@ -1,9 +1,10 @@
 // ----------------------------------------------------------------------------
-// -                        Open3D: www.open3d.org                            -
+// -                        Open3D: www.open-3d.org                            -
 // ----------------------------------------------------------------------------
 // The MIT License (MIT)
 //
-// Copyright (c) 2018 www.open3d.org
+// Copyright (c) 2018, Intel Visual Computing Lab
+// Copyright (c) 2018, Open3D community
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,16 +35,16 @@ namespace three {
 class Geometry2D : public Geometry
 {
 public:
-	~Geometry2D() override {}
+    ~Geometry2D() override {}
 
 protected:
-	Geometry2D(GeometryType type) : Geometry(type, 2) {}
+    Geometry2D(GeometryType type) : Geometry(type, 2) {}
 
 public:
-	void Clear() override = 0;
-	bool IsEmpty() const override = 0;
-	virtual Eigen::Vector2d GetMinBound() const = 0;
-	virtual Eigen::Vector2d GetMaxBound() const = 0;
+    void Clear() override = 0;
+    bool IsEmpty() const override = 0;
+    virtual Eigen::Vector2d GetMinBound() const = 0;
+    virtual Eigen::Vector2d GetMaxBound() const = 0;
 };
 
-}	// namespace three
+}   // namespace three

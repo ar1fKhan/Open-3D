@@ -1,9 +1,10 @@
 // ----------------------------------------------------------------------------
-// -                        Open3D: www.open3d.org                            -
+// -                        Open3D: www.open-3d.org                            -
 // ----------------------------------------------------------------------------
 // The MIT License (MIT)
 //
-// Copyright (c) 2018 www.open3d.org
+// Copyright (c) 2018, Intel Visual Computing Lab
+// Copyright (c) 2018, Open3D community
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,24 +41,24 @@ class PointCloud;
 class SelectionPolygonVolume : public IJsonConvertible
 {
 public:
-	~SelectionPolygonVolume() override {}
-	
+    ~SelectionPolygonVolume() override {}
+
 public:
-	bool ConvertToJsonValue(Json::Value &value) const override;
-	bool ConvertFromJsonValue(const Json::Value &value) override;
-	std::shared_ptr<PointCloud> CropPointCloud(const PointCloud &input) const;
+    bool ConvertToJsonValue(Json::Value &value) const override;
+    bool ConvertFromJsonValue(const Json::Value &value) override;
+    std::shared_ptr<PointCloud> CropPointCloud(const PointCloud &input) const;
 
 private:
-	std::shared_ptr<PointCloud> CropPointCloudInPolygon(
-			const PointCloud &input) const;
-	std::vector<size_t> CropInPolygon(
-			const std::vector<Eigen::Vector3d> &input) const;
+    std::shared_ptr<PointCloud> CropPointCloudInPolygon(
+            const PointCloud &input) const;
+    std::vector<size_t> CropInPolygon(
+            const std::vector<Eigen::Vector3d> &input) const;
 
 public:
-	std::string orthogonal_axis_ = "";
-	std::vector<Eigen::Vector3d> bounding_polygon_;
-	double axis_min_ = 0.0;
-	double axis_max_ = 0.0;
+    std::string orthogonal_axis_ = "";
+    std::vector<Eigen::Vector3d> bounding_polygon_;
+    double axis_min_ = 0.0;
+    double axis_max_ = 0.0;
 };
 
-}	// namespace three
+}   // namespace three
