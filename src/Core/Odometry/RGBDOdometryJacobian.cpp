@@ -31,7 +31,7 @@
 #include <Core/Geometry/RGBDImage.h>
 #include <Core/Odometry/RGBDOdometryJacobian.h>
 
-namespace three {
+namespace open3d {
 
 namespace {
 
@@ -155,4 +155,4 @@ void RGBDOdometryJacobianFromHybridTerm::ComputeJacobianAndResidual(
     r[1] = r_geo;
 }
 
-}   // namespace three
+}   // namespace open3d

@@ -32,7 +32,7 @@
 #include <Core/Geometry/TriangleMesh.h>
 #include <Core/Camera/PinholeCameraIntrinsic.h>
 
-namespace three {
+namespace open3d {
 
 /// Interface class of the Truncated Signed Distance Function (TSDF) volume
 /// This volume is usually used to integrate surface data (e.g., a series of
@@ -72,4 +72,4 @@ public:
     bool with_color_;
 };
 
-}   // namespace three
+}   // namespace open3d

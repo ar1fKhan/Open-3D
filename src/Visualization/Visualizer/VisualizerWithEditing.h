@@ -29,7 +29,7 @@
 
 #include <Visualization/Visualizer/Visualizer.h>
 
-namespace three {
+namespace open3d {
 
 class SelectionPolygon;
 class PointCloudPicker;
@@ -92,4 +92,4 @@ protected:
     std::string default_directory_;
 };
 
-}   // namespace three
+}   // namespace open3d

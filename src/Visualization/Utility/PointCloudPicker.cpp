@@ -30,7 +30,7 @@
 #include <Core/Geometry/PointCloud.h>
 #include <Core/Utility/Console.h>
 
-namespace three{
+namespace open3d {
 
 void PointCloudPicker::Clear()
 {
@@ -75,4 +75,4 @@ bool PointCloudPicker::SetPointCloud(std::shared_ptr<const Geometry> ptr)
     return true;
 }
 
-}   // namespace three
+}   // namespace open3d

@@ -29,7 +29,7 @@
 #include <memory>
 #include <Eigen/Core>
 
-namespace three {
+namespace open3d {
 
 class ColorMap
 {
@@ -117,4 +117,4 @@ public:
 const std::shared_ptr<const ColorMap> GetGlobalColorMap();
 void SetGlobalColorMap(ColorMap::ColorMapOption option);
 
-}   // namespace three
+}   // namespace open3d

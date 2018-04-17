@@ -34,7 +34,7 @@
 #include <Core/Geometry/Geometry3D.h>
 #include <Core/Geometry/KDTreeSearchParam.h>
 
-namespace three {
+namespace open3d {
 
 class Image;
 class RGBDImage;
@@ -177,4 +177,4 @@ std::vector<double> ComputePointCloudMahalanobisDistance(
 std::vector<double> ComputePointCloudNearestNeighborDistance(
         const PointCloud &input);
 
-}   // namespace three
+}   // namespace open3d

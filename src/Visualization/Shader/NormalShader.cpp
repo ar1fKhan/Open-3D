@@ -31,7 +31,7 @@
 #include <Core/Geometry/TriangleMesh.h>
 #include <Visualization/Shader/Shader.h>
 
-namespace three{
+namespace open3d {
 
 namespace glsl {
 
@@ -236,4 +236,4 @@ bool NormalShaderForTriangleMesh::PrepareBinding(const Geometry &geometry,
 
 }   // namespace glsl
 
-}   // namespace three
+}   // namespace open3d

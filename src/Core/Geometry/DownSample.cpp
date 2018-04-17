@@ -32,7 +32,7 @@
 #include <Core/Utility/Helper.h>
 #include <Core/Utility/Console.h>
 
-namespace three{
+namespace open3d {
 
 namespace {
 
@@ -181,4 +181,4 @@ std::shared_ptr<PointCloud> CropPointCloud(const PointCloud &input,
     return SelectDownSample(input, indices);
 }
 
-}   // namespace three
+}   // namespace open3d

@@ -35,7 +35,7 @@
 
 int main(int argc, char *argv[])
 {
-    using namespace three;
+    using namespace open3d;
     SetVerbosityLevel(VerbosityLevel::VerboseAlways);
 
     if (argc != 3) {

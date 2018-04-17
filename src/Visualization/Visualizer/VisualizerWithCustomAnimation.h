@@ -29,7 +29,7 @@
 
 #include <Visualization/Visualizer/Visualizer.h>
 
-namespace three {
+namespace open3d {
 
 class VisualizerWithCustomAnimation : public Visualizer
 {
@@ -78,4 +78,4 @@ protected:
     size_t recording_file_index_ = 0;
 };
 
-}   // namespace three
+}   // namespace open3d

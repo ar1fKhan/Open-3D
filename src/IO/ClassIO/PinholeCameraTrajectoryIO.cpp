@@ -32,7 +32,7 @@
 #include <Core/Utility/FileSystem.h>
 #include <IO/ClassIO/IJsonConvertibleIO.h>
 
-namespace three{
+namespace open3d {
 
 namespace {
 
@@ -101,4 +101,4 @@ bool WritePinholeCameraTrajectory(const std::string &filename,
     return map_itr->second(filename, trajectory);
 }
 
-}   // namespace three
+}   // namespace open3d

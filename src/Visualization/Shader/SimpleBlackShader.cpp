@@ -32,7 +32,7 @@
 #include <Visualization/Shader/Shader.h>
 #include <Visualization/Utility/ColorMap.h>
 
-namespace three{
+namespace open3d {
 
 namespace glsl {
 
@@ -197,4 +197,4 @@ bool SimpleBlackShaderForTriangleMeshWireFrame::PrepareBinding(
 
 }
 
-}   // namespace three
+}   // namespace open3d

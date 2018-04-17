@@ -30,7 +30,7 @@
 #include <string>
 #include <Core/Geometry/Image.h>
 
-namespace three {
+namespace open3d {
 
 /// The general entrance for reading an Image from a file
 /// The function calls read functions based on the extension name of filename.
@@ -55,4 +55,4 @@ bool ReadImageFromJPG(const std::string &filename, Image &image);
 bool WriteImageToJPG(const std::string &filename, const Image &image,
         int quality = 90);
 
-}   // namespace three
+}   // namespace open3d

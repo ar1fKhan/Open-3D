@@ -30,7 +30,7 @@
 #include <Core/Geometry/Geometry3D.h>
 #include <Core/Utility/Console.h>
 
-namespace three {
+namespace open3d {
 
 /// A 3D bounding box class
 /// It is a utility class for Visualization
@@ -79,4 +79,4 @@ public:
     Eigen::Vector3d max_bound_ = Eigen::Vector3d::Zero();
 };
 
-}   // namespace three
+}   // namespace open3d

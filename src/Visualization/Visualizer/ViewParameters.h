@@ -30,7 +30,7 @@
 #include <Eigen/Core>
 #include <IO/ClassIO/IJsonConvertible.h>
 
-namespace three {
+namespace open3d {
 
 class ViewParameters : public IJsonConvertible
 {
@@ -58,4 +58,4 @@ public:
     Eigen::Vector3d boundingbox_max_;
 };
 
-}   // namespace three
+}   // namespace open3d

@@ -27,7 +27,7 @@
 
 #pragma once
 
-namespace three {
+namespace open3d {
 
 class GlobalOptimizationOption
 {

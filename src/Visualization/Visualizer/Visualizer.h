@@ -40,7 +40,7 @@
 #include <Visualization/Visualizer/RenderOption.h>
 #include <Visualization/Shader/GeometryRenderer.h>
 
-namespace three {
+namespace open3d {
 
 class TriangleMesh;
 class Image;
@@ -220,4 +220,4 @@ protected:
 #endif //__APPLE__
 };
 
-}   // namespace three
+}   // namespace open3d

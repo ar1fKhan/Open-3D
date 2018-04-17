@@ -32,7 +32,7 @@
 #include <Core/Utility/FileSystem.h>
 #include <IO/ClassIO/IJsonConvertibleIO.h>
 
-namespace three{
+namespace open3d {
 
 namespace {
 
@@ -99,4 +99,4 @@ bool WritePoseGraph(const std::string &filename,
     return map_itr->second(filename, pose_graph);
 }
 
-}   // namespace three
+}   // namespace open3d

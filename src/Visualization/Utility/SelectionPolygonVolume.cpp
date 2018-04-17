@@ -31,7 +31,7 @@
 #include <Core/Utility/Console.h>
 #include <Core/Geometry/PointCloud.h>
 
-namespace three{
+namespace open3d {
 
 bool SelectionPolygonVolume::ConvertToJsonValue(Json::Value &value) const
 {
@@ -138,4 +138,4 @@ std::vector<size_t> SelectionPolygonVolume::CropInPolygon(
     return output_index;
 }
 
-}   // namespace three
+}   // namespace open3d

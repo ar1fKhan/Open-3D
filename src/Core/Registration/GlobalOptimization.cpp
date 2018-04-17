@@ -36,7 +36,7 @@
 #include <Core/Registration/GlobalOptimizationMethod.h>
 #include <Core/Registration/GlobalOptimizationConvergenceCriteria.h>
 
-namespace three{
+namespace open3d {
 
 namespace {
 
@@ -616,4 +616,4 @@ void GlobalOptimization(
     pose_graph = *pose_graph_pruned;
 }
 
-}   // namespace three
+}   // namespace open3d

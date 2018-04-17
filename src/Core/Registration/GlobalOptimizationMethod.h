@@ -29,7 +29,7 @@
 
 #include <memory>
 
-namespace three {
+namespace open3d {
 
 class PoseGraph;
 
@@ -78,4 +78,4 @@ public:
             const GlobalOptimizationOption &option) const override;
 };
 
-}   // namespace three
+}   // namespace open3d

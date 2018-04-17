@@ -34,7 +34,7 @@
 #include <Core/Utility/Helper.h>
 #include <Core/Utility/Console.h>
 
-namespace three{
+namespace open3d {
 
 void TriangleMesh::Clear()
 {
@@ -326,4 +326,4 @@ void TriangleMesh::RemoveNonManifoldTriangles()
             (int)(old_triangle_num - k));
 }
 
-}   // namespace three
+}   // namespace open3d

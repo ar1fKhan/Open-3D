@@ -31,7 +31,7 @@
 #include <Core/Geometry/PointCloud.h>
 #include <Core/Utility/Eigen.h>
 
-namespace three{
+namespace open3d {
 
 double TransformationEstimationPointToPoint::ComputeRMSE(
         const PointCloud &source, const PointCloud &target,
@@ -103,4 +103,4 @@ Eigen::Matrix4d TransformationEstimationPointToPlane::ComputeTransformation(
     return is_success ? extrinsic : Eigen::Matrix4d::Identity();
 }
 
-}   // namespace three
+}   // namespace open3d

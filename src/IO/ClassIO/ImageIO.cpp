@@ -31,7 +31,7 @@
 #include <Core/Utility/Console.h>
 #include <Core/Utility/FileSystem.h>
 
-namespace three{
+namespace open3d {
 
 namespace {
 
@@ -86,4 +86,4 @@ bool WriteImage(const std::string &filename, const Image &image,
     return map_itr->second(filename, image, quality);
 }
 
-}   // namespace three
+}   // namespace open3d

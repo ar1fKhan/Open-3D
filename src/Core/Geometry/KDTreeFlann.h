@@ -41,7 +41,7 @@ template <typename T> struct L2;
 template <typename T> class Index;
 }   // namespace flann
 
-namespace three {
+namespace open3d {
 
 class KDTreeFlann
 {
@@ -86,4 +86,4 @@ protected:
     size_t dataset_size_ = 0;
 };
 
-}   // namespace three
+}   // namespace open3d

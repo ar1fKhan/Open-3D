@@ -33,7 +33,7 @@
 #include <IO/ClassIO/IJsonConvertible.h>
 #include <Visualization/Visualizer/ViewParameters.h>
 
-namespace three {
+namespace open3d {
 
 class ViewTrajectory : public IJsonConvertible
 {
@@ -93,4 +93,4 @@ public:
     std::vector<ViewParameters::Matrix17x4d> coeff_;
 };
 
-}   // namespace three
+}   // namespace open3d

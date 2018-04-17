@@ -30,7 +30,7 @@
 #include <Core/Camera/PinholeCameraIntrinsic.h>
 #include <IO/ClassIO/ImageIO.h>
 
-namespace three{
+namespace open3d {
 
 std::shared_ptr<Image> CreateImageFromFile(const std::string &filename)
 {
@@ -190,4 +190,4 @@ ImagePyramid CreateImagePyramid(
     return pyramid_image;
 }
 
-}   // namespace three
+}   // namespace open3d

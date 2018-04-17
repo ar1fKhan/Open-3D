@@ -33,7 +33,7 @@
 #include <Eigen/Core>
 #include <IO/ClassIO/IJsonConvertible.h>
 
-namespace three {
+namespace open3d {
 
 class Geometry;
 class PointCloud;
@@ -61,4 +61,4 @@ public:
     double axis_max_ = 0.0;
 };
 
-}   // namespace three
+}   // namespace open3d

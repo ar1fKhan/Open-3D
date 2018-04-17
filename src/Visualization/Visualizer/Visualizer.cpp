@@ -29,7 +29,7 @@
 
 #include <Core/Geometry/TriangleMesh.h>
 
-namespace three{
+namespace open3d {
 
 namespace {
 
@@ -428,4 +428,4 @@ void Visualizer::PrintVisualizerHelp()
     PrintInfo("\n");
 }
 
-}   // namespace three
+}   // namespace open3d

@@ -27,7 +27,7 @@
 
 #include "Visualizer.h"
 
-namespace three{
+namespace open3d {
 
 void Visualizer::WindowRefreshCallback(GLFWwindow *window)
 {
@@ -324,4 +324,4 @@ void Visualizer::WindowCloseCallback(GLFWwindow *window)
     // happens when user click the close icon to close the window
 }
 
-}   // namespace three
+}   // namespace open3d

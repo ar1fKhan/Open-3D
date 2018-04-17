@@ -30,7 +30,7 @@
 #include <string>
 #include <Core/Geometry/PointCloud.h>
 
-namespace three {
+namespace open3d {
 
 /// The general entrance for reading a PointCloud from a file
 /// The function calls read functions based on the extension name of filename.
@@ -85,4 +85,4 @@ bool WritePointCloudToPTS(const std::string &filename,
         const PointCloud &pointcloud, bool write_ascii = false,
         bool compressed = false);
 
-}   // namespace three
+}   // namespace open3d

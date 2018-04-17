@@ -30,7 +30,7 @@
 #include <json/json.h>
 #include <Core/Utility/Console.h>
 
-namespace three{
+namespace open3d {
 
 PinholeCameraTrajectory::PinholeCameraTrajectory()
 {
@@ -90,4 +90,4 @@ bool PinholeCameraTrajectory::ConvertFromJsonValue(const Json::Value &value)
     return true;
 }
 
-}   // namespace three
+}   // namespace open3d

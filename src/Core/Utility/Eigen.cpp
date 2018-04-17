@@ -30,7 +30,7 @@
 #include <Eigen/Geometry>
 #include <Core/Utility/Console.h>
 
-namespace three{
+namespace open3d {
 
 /// Function to solve Ax=b
 std::tuple<bool, Eigen::VectorXd> SolveLinearSystem(
@@ -234,4 +234,4 @@ template std::tuple<Eigen::Matrix6d, Eigen::Vector6d> ComputeJTJandJTr(
         std::function<void(int, std::vector<Eigen::Vector6d> &,
         std::vector<double> &)> f, int iteration_num);
 
-}   // namespace three
+}   // namespace open3d

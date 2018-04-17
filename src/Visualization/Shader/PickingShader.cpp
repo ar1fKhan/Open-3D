@@ -32,7 +32,7 @@
 #include <Visualization/Utility/ColorMap.h>
 #include <Visualization/Utility/GLHelper.h>
 
-namespace three{
+namespace open3d {
 
 namespace glsl {
 
@@ -159,6 +159,6 @@ bool PickingShaderForPointCloud::PrepareBinding(const Geometry &geometry,
     return true;
 }
 
-}   // namespace three::glsl
+}   // namespace open3d::glsl
 
-}   // namespace three
+}   // namespace open3d

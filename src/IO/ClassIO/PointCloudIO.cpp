@@ -31,7 +31,7 @@
 #include <Core/Utility/Console.h>
 #include <Core/Utility/FileSystem.h>
 
-namespace three{
+namespace open3d {
 
 namespace {
 
@@ -101,4 +101,4 @@ bool WritePointCloud(const std::string &filename, const PointCloud &pointcloud,
     return success;
 }
 
-}   // namespace three
+}   // namespace open3d
