@@ -27,7 +27,7 @@
 
 #include "VisualizerForAlignment.h"
 
-#include <External/tinyfiledialogs/tinyfiledialogs.h>
+#include <tinyfiledialogs/tinyfiledialogs.h>
 
 namespace open3d {
 
