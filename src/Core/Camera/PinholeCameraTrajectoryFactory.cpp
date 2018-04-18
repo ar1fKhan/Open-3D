@@ -31,12 +31,6 @@
 
 namespace open3d {
 
-std::shared_ptr<PinholeCameraTrajectory> CreatePinholeCameraTrajectoryFromFile(
-        const std::string &filename)
-{
-    auto trajectory = std::make_shared<PinholeCameraTrajectory>();
-    ReadPinholeCameraTrajectory(filename, *trajectory);
-    return trajectory;
-}
+
 
 }   // namespace open3d

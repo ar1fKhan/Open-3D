@@ -31,7 +31,7 @@
 #include <string>
 #include <memory>
 #include <Eigen/Core>
-#include <IO/ClassIO/IJsonConvertible.h>
+#include <Core/Utility/IJsonConvertible.h>
 
 namespace open3d {
 
