@@ -3,7 +3,7 @@
 // ----------------------------------------------------------------------------
 // The MIT License (MIT)
 //
-// Copyright (c) 2018, Intel Visual Computing Lab
+// Copyright (c) 2018, Intel Labs
 // Copyright (c) 2018, Open3D community
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,7 +27,7 @@
 
 #pragma once
 
-#include <Python/py3d.h>
+#include <Open3D/Python/py3d.h>
 #include <Open3D/Core/Geometry/Geometry.h>
 #include <Open3D/Core/Geometry/Geometry2D.h>
 #include <Open3D/Core/Geometry/Geometry3D.h>
