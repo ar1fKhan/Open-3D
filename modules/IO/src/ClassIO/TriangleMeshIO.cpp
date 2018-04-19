@@ -25,7 +25,7 @@
 // IN THE SOFTWARE.
 // ----------------------------------------------------------------------------
 
-#include "ImageIO.h"
+#include <Open3D/IO/ClassIO/TriangleMeshIO.h>
 
 #include <unordered_map>
 #include <Open3D/Core/Utility/Console.h>
@@ -36,61 +36,66 @@ namespace open3d {
 namespace {
 
 static const std::unordered_map<std::string,
-        std::function<bool(const std::string &, Image &)>>
-        file_extension_to_image_read_function
-        {{"png", ReadImageFromPNG},
-        {"jpg", ReadImageFromJPG},
-        {"jpeg", ReadImageFromJPG},
+        std::function<bool(const std::string &, TriangleMesh &)>>
+        file_extension_to_trianglemesh_read_function
+        {{"ply", ReadTriangleMeshFromPLY},
         };
 
 static const std::unordered_map<std::string,
-        std::function<bool(const std::string &, const Image &, int)>>
-        file_extension_to_image_write_function
-        {{"png", WriteImageToPNG},
-        {"jpg", WriteImageToJPG},
-        {"jpeg", WriteImageToJPG},
+        std::function<bool(const std::string &, const TriangleMesh &,
+        const bool, const bool)>>
+        file_extension_to_trianglemesh_write_function
+        {{"ply", WriteTriangleMeshToPLY},
         };
 
 }   // unnamed namespace
 
-std::shared_ptr<Image> CreateImageFromFile(const std::string &filename)
+std::shared_ptr<TriangleMesh> CreateMeshFromFile(const std::string &filename)
 {
-    auto image = std::make_shared<Image>();
-    ReadImage(filename, *image);
-    return image;
+    auto mesh = std::make_shared<TriangleMesh>();
+    ReadTriangleMesh(filename, *mesh);
+    return mesh;
 }
 
-bool ReadImage(const std::string &filename, Image &image)
+bool ReadTriangleMesh(const std::string &filename, TriangleMesh &mesh)
 {
     std::string filename_ext =
             filesystem::GetFileExtensionInLowerCase(filename);
     if (filename_ext.empty()) {
-        PrintWarning("Read Image failed: unknown file extension.\n");
+        PrintWarning("Read TriangleMesh failed: unknown file extension.\n");
         return false;
     }
-    auto map_itr = file_extension_to_image_read_function.find(filename_ext);
-    if (map_itr == file_extension_to_image_read_function.end()) {
-        PrintWarning("Read Image failed: unknown file extension.\n");
+    auto map_itr =
+            file_extension_to_trianglemesh_read_function.find(filename_ext);
+    if (map_itr == file_extension_to_trianglemesh_read_function.end()) {
+        PrintWarning("Read TriangleMesh failed: unknown file extension.\n");
         return false;
     }
-    return map_itr->second(filename, image);
+    bool success = map_itr->second(filename, mesh);
+    PrintDebug("Read TriangleMesh: %d triangles and %d vertices.\n",
+            (int)mesh.triangles_.size(), (int)mesh.vertices_.size());
+    return success;
 }
 
-bool WriteImage(const std::string &filename, const Image &image,
-        int quality/* = 90*/)
+bool WriteTriangleMesh(const std::string &filename, const TriangleMesh &mesh,
+        bool write_ascii/* = false*/, bool compressed/* = false*/)
 {
     std::string filename_ext =
             filesystem::GetFileExtensionInLowerCase(filename);
     if (filename_ext.empty()) {
-        PrintWarning("Write Image failed: unknown file extension.\n");
+        PrintWarning("Write TriangleMesh failed: unknown file extension.\n");
         return false;
     }
-    auto map_itr = file_extension_to_image_write_function.find(filename_ext);
-    if (map_itr == file_extension_to_image_write_function.end()) {
-        PrintWarning("Write Image failed: unknown file extension.\n");
+    auto map_itr =
+            file_extension_to_trianglemesh_write_function.find(filename_ext);
+    if (map_itr == file_extension_to_trianglemesh_write_function.end()) {
+        PrintWarning("Write TriangleMesh failed: unknown file extension.\n");
         return false;
     }
-    return map_itr->second(filename, image, quality);
+    bool success = map_itr->second(filename, mesh, write_ascii, compressed);
+    PrintDebug("Write TriangleMesh: %d triangles and %d vertices.\n",
+            (int)mesh.triangles_.size(), (int)mesh.vertices_.size());
+    return success;
 }
 
 }   // namespace open3d

@@ -25,7 +25,7 @@
 // IN THE SOFTWARE.
 // ----------------------------------------------------------------------------
 
-#include "TriangleMeshIO.h"
+#include <Open3D/IO/ClassIO/IJsonConvertibleIO.h>
 
 #include <unordered_map>
 #include <Open3D/Core/Utility/Console.h>
@@ -36,66 +36,54 @@ namespace open3d {
 namespace {
 
 static const std::unordered_map<std::string,
-        std::function<bool(const std::string &, TriangleMesh &)>>
-        file_extension_to_trianglemesh_read_function
-        {{"ply", ReadTriangleMeshFromPLY},
+        std::function<bool(const std::string &, IJsonConvertible &)>>
+        file_extension_to_ijsonconvertible_read_function
+        {{"json", ReadIJsonConvertibleFromJSON},
         };
 
 static const std::unordered_map<std::string,
-        std::function<bool(const std::string &, const TriangleMesh &,
-        const bool, const bool)>>
-        file_extension_to_trianglemesh_write_function
-        {{"ply", WriteTriangleMeshToPLY},
+        std::function<bool(const std::string &, const IJsonConvertible &)>>
+        file_extension_to_ijsonconvertible_write_function
+        {{"json", WriteIJsonConvertibleToJSON},
         };
 
 }   // unnamed namespace
 
-std::shared_ptr<TriangleMesh> CreateMeshFromFile(const std::string &filename)
-{
-    auto mesh = std::make_shared<TriangleMesh>();
-    ReadTriangleMesh(filename, *mesh);
-    return mesh;
-}
-
-bool ReadTriangleMesh(const std::string &filename, TriangleMesh &mesh)
+bool ReadIJsonConvertible(const std::string &filename,
+        IJsonConvertible &object)
 {
     std::string filename_ext =
             filesystem::GetFileExtensionInLowerCase(filename);
     if (filename_ext.empty()) {
-        PrintWarning("Read TriangleMesh failed: unknown file extension.\n");
+        PrintWarning("Read IJsonConvertible failed: unknown file extension.\n");
         return false;
     }
     auto map_itr =
-            file_extension_to_trianglemesh_read_function.find(filename_ext);
-    if (map_itr == file_extension_to_trianglemesh_read_function.end()) {
-        PrintWarning("Read TriangleMesh failed: unknown file extension.\n");
+            file_extension_to_ijsonconvertible_read_function.find(filename_ext);
+    if (map_itr == file_extension_to_ijsonconvertible_read_function.end()) {
+        PrintWarning("Read IJsonConvertible failed: unknown file extension.\n");
         return false;
     }
-    bool success = map_itr->second(filename, mesh);
-    PrintDebug("Read TriangleMesh: %d triangles and %d vertices.\n",
-            (int)mesh.triangles_.size(), (int)mesh.vertices_.size());
-    return success;
+    return map_itr->second(filename, object);
 }
 
-bool WriteTriangleMesh(const std::string &filename, const TriangleMesh &mesh,
-        bool write_ascii/* = false*/, bool compressed/* = false*/)
+bool WriteIJsonConvertible(const std::string &filename,
+        const IJsonConvertible &object)
 {
     std::string filename_ext =
             filesystem::GetFileExtensionInLowerCase(filename);
     if (filename_ext.empty()) {
-        PrintWarning("Write TriangleMesh failed: unknown file extension.\n");
+        PrintWarning("Write IJsonConvertible failed: unknown file extension.\n");
         return false;
     }
     auto map_itr =
-            file_extension_to_trianglemesh_write_function.find(filename_ext);
-    if (map_itr == file_extension_to_trianglemesh_write_function.end()) {
-        PrintWarning("Write TriangleMesh failed: unknown file extension.\n");
+            file_extension_to_ijsonconvertible_write_function.find(
+            filename_ext);
+    if (map_itr == file_extension_to_ijsonconvertible_write_function.end()) {
+        PrintWarning("Write IJsonConvertible failed: unknown file extension.\n");
         return false;
     }
-    bool success = map_itr->second(filename, mesh, write_ascii, compressed);
-    PrintDebug("Write TriangleMesh: %d triangles and %d vertices.\n",
-            (int)mesh.triangles_.size(), (int)mesh.vertices_.size());
-    return success;
+    return map_itr->second(filename, object);
 }
 
 }   // namespace open3d

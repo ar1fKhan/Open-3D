@@ -25,7 +25,7 @@
 // IN THE SOFTWARE.
 // ----------------------------------------------------------------------------
 
-#include "IJsonConvertibleIO.h"
+#include <Open3D/IO/ClassIO/ImageIO.h>
 
 #include <unordered_map>
 #include <Open3D/Core/Utility/Console.h>
@@ -36,54 +36,61 @@ namespace open3d {
 namespace {
 
 static const std::unordered_map<std::string,
-        std::function<bool(const std::string &, IJsonConvertible &)>>
-        file_extension_to_ijsonconvertible_read_function
-        {{"json", ReadIJsonConvertibleFromJSON},
+        std::function<bool(const std::string &, Image &)>>
+        file_extension_to_image_read_function
+        {{"png", ReadImageFromPNG},
+        {"jpg", ReadImageFromJPG},
+        {"jpeg", ReadImageFromJPG},
         };
 
 static const std::unordered_map<std::string,
-        std::function<bool(const std::string &, const IJsonConvertible &)>>
-        file_extension_to_ijsonconvertible_write_function
-        {{"json", WriteIJsonConvertibleToJSON},
+        std::function<bool(const std::string &, const Image &, int)>>
+        file_extension_to_image_write_function
+        {{"png", WriteImageToPNG},
+        {"jpg", WriteImageToJPG},
+        {"jpeg", WriteImageToJPG},
         };
 
 }   // unnamed namespace
 
-bool ReadIJsonConvertible(const std::string &filename,
-        IJsonConvertible &object)
+std::shared_ptr<Image> CreateImageFromFile(const std::string &filename)
 {
-    std::string filename_ext =
-            filesystem::GetFileExtensionInLowerCase(filename);
-    if (filename_ext.empty()) {
-        PrintWarning("Read IJsonConvertible failed: unknown file extension.\n");
-        return false;
-    }
-    auto map_itr =
-            file_extension_to_ijsonconvertible_read_function.find(filename_ext);
-    if (map_itr == file_extension_to_ijsonconvertible_read_function.end()) {
-        PrintWarning("Read IJsonConvertible failed: unknown file extension.\n");
-        return false;
-    }
-    return map_itr->second(filename, object);
+    auto image = std::make_shared<Image>();
+    ReadImage(filename, *image);
+    return image;
 }
 
-bool WriteIJsonConvertible(const std::string &filename,
-        const IJsonConvertible &object)
+bool ReadImage(const std::string &filename, Image &image)
 {
     std::string filename_ext =
             filesystem::GetFileExtensionInLowerCase(filename);
     if (filename_ext.empty()) {
-        PrintWarning("Write IJsonConvertible failed: unknown file extension.\n");
+        PrintWarning("Read Image failed: unknown file extension.\n");
         return false;
     }
-    auto map_itr =
-            file_extension_to_ijsonconvertible_write_function.find(
-            filename_ext);
-    if (map_itr == file_extension_to_ijsonconvertible_write_function.end()) {
-        PrintWarning("Write IJsonConvertible failed: unknown file extension.\n");
+    auto map_itr = file_extension_to_image_read_function.find(filename_ext);
+    if (map_itr == file_extension_to_image_read_function.end()) {
+        PrintWarning("Read Image failed: unknown file extension.\n");
         return false;
     }
-    return map_itr->second(filename, object);
+    return map_itr->second(filename, image);
+}
+
+bool WriteImage(const std::string &filename, const Image &image,
+        int quality/* = 90*/)
+{
+    std::string filename_ext =
+            filesystem::GetFileExtensionInLowerCase(filename);
+    if (filename_ext.empty()) {
+        PrintWarning("Write Image failed: unknown file extension.\n");
+        return false;
+    }
+    auto map_itr = file_extension_to_image_write_function.find(filename_ext);
+    if (map_itr == file_extension_to_image_write_function.end()) {
+        PrintWarning("Write Image failed: unknown file extension.\n");
+        return false;
+    }
+    return map_itr->second(filename, image, quality);
 }
 
 }   // namespace open3d

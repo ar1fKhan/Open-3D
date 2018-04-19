@@ -25,8 +25,8 @@
 // IN THE SOFTWARE.
 // ----------------------------------------------------------------------------
 
-#include <IO/ClassIO/PointCloudIO.h>
-#include <IO/ClassIO/TriangleMeshIO.h>
+#include <Open3D/IO/ClassIO/PointCloudIO.h>
+#include <Open3D/IO/ClassIO/TriangleMeshIO.h>
 
 #include <rply/rply.h>
 #include <Open3D/Core/Utility/Console.h>
