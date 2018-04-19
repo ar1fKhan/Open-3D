@@ -26,7 +26,7 @@
 // ----------------------------------------------------------------------------
 
 #include <tinyfiledialogs/tinyfiledialogs.h>
-#include <Core/Core.h>
+#include <Open3D/Core/Core.h>
 
 void PrintHelp()
 {

@@ -29,7 +29,7 @@
 #include <memory>
 
 #include <Eigen/Dense>
-#include <Core/Core.h>
+#include <Open3D/Core/Core.h>
 #include <IO/IO.h>
 #include <Visualization/Visualization.h>
 
