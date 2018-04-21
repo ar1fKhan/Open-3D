@@ -142,7 +142,7 @@ int main(int argc, char **argv)
             }
         }
         WriteIJsonConvertible(alignment_filename, session);
-        return 1;
+        return 0;
     }
 
     if (!eval_filename.empty()) {
@@ -183,7 +183,7 @@ int main(int argc, char **argv)
         f = fopen(target_binname.c_str(), "wb");
         fwrite(target_dis.data(), sizeof(double), target_dis.size(), f);
         fclose(f);
-        return 1;
+        return 0;
     }
 
     VisualizerWithEditing vis_source, vis_target;
@@ -214,5 +214,5 @@ int main(int argc, char **argv)
     vis_source.DestroyWindow();
     vis_target.DestroyWindow();
     vis_main.DestroyWindow();
-    return 1;
+    return 0;
 }

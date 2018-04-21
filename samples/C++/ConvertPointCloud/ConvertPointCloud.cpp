@@ -203,5 +203,5 @@ int main(int argc, char **argv)
         PrintError("File or directory does not exist.\n");
     }
 
-    return 1;
+    return 0;
 }

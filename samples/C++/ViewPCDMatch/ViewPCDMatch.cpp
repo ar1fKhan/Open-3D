@@ -151,5 +151,5 @@ int main(int argc, char *argv[])
         DrawGeometriesWithCustomAnimation({pcd_target, pcd_source},
                 "ViewPCDMatch", 1600, 900);
     }
-    return 1;
+    return 0;
 }
