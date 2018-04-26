@@ -1,7 +1,8 @@
 # Open3D: A Modern Library for 3D Data Processing
 
-[![Build Status](https://travis-ci.org/Sahloul/Open3D.svg?branch=master)](https://travis-ci.org/Sahloul/Open3D)
-[![Build status](https://ci.appveyor.com/api/projects/status/4cf22otffmfyuif2?svg=true)](https://ci.appveyor.com/project/Sahloul/open3d)
+[![Build Status (Travis CI)](https://travis-ci.org/Open-3D/Open3D.svg?branch=master)](https://travis-ci.org/Open-3D/Open3D)
+[![Build status (AppVeyor)](https://ci.appveyor.com/api/projects/status/2a7o5awtmpetjs73?svg=true)](https://ci.appveyor.com/project/Sahloul/open3d)
+
 
 ## About this project
 
