@@ -175,7 +175,7 @@ void pybind_eigen_vector_of_matrix(py::module &m, const std::string &bind_name,
 
 void pybind_eigen(py::module &m)
 {
-    pybind_eigen_vector_of_scalar<int>(m, "IntVector");
+    pybind_eigen_vector_of_scalar<int32_t>(m, "IntVector");
     pybind_eigen_vector_of_scalar<double>(m, "DoubleVector");
     pybind_eigen_vector_of_vector<Eigen::Vector3d>(m, "Vector3dVector",
             "std::vector<Eigen::Vector3d>");

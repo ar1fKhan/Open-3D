@@ -65,7 +65,7 @@ public:
     };
 public:
     ScalableTSDFVolume(double voxel_length, double sdf_trunc, bool with_color,
-            int volume_unit_resolution = 16, int depth_sampling_stride = 4);
+            int32_t volume_unit_resolution = 16, int32_t depth_sampling_stride = 4);
     ~ScalableTSDFVolume() override;
 
 public:
@@ -78,9 +78,9 @@ public:
     std::shared_ptr<PointCloud> ExtractVoxelPointCloud();
 
 public:
-    int volume_unit_resolution_;
+    int32_t volume_unit_resolution_;
     double volume_unit_length_;
-    int depth_sampling_stride_;
+    int32_t depth_sampling_stride_;
 
     /// Assume the index of the volume unit is (x, y, z), then the unit spans
     /// from (x, y, z) * volume_unit_length_
@@ -90,9 +90,9 @@ public:
 
 private:
     Eigen::Vector3i LocateVolumeUnit(const Eigen::Vector3d &point) {
-        return Eigen::Vector3i((int)std::floor(point(0) / volume_unit_length_),
-                (int)std::floor(point(1) / volume_unit_length_),
-                (int)std::floor(point(2) / volume_unit_length_));
+        return Eigen::Vector3i(static_cast<Eigen::Vector3i::Scalar>(std::floor(point(0) / volume_unit_length_)),
+                static_cast<Eigen::Vector3i::Scalar>(std::floor(point(1) / volume_unit_length_)),
+                static_cast<Eigen::Vector3i::Scalar>(std::floor(point(2) / volume_unit_length_)));
     }
 
     std::shared_ptr<UniformTSDFVolume> OpenVolumeUnit(

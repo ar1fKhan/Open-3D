@@ -165,8 +165,8 @@ std::shared_ptr<Image> Visualizer::CaptureScreenFloatBuffer(
     auto image_ptr = std::make_shared<Image>();
     image_ptr->PrepareImage(view_control_ptr_->GetWindowWidth(),
             view_control_ptr_->GetWindowHeight(), 3, 4);
-    int bytes_per_line = screen_image.BytesPerLine();
-    for (int i = 0; i < screen_image.height_; i++) {
+    int32_t bytes_per_line = screen_image.BytesPerLine();
+    for (int32_t i = 0; i < screen_image.height_; i++) {
         memcpy(image_ptr->data_.data() + bytes_per_line * i,
                 screen_image.data_.data() + bytes_per_line *
                 (screen_image.height_ - i - 1), bytes_per_line);
@@ -201,8 +201,8 @@ void Visualizer::CaptureScreenImage(const std::string &filename/* = ""*/,
     Image png_image;
     png_image.PrepareImage(view_control_ptr_->GetWindowWidth(),
             view_control_ptr_->GetWindowHeight(), 3, 1);
-    int bytes_per_line = screen_image.BytesPerLine();
-    for (int i = 0; i < screen_image.height_; i++) {
+    int32_t bytes_per_line = screen_image.BytesPerLine();
+    for (int32_t i = 0; i < screen_image.height_; i++) {
         memcpy(png_image.data_.data() + bytes_per_line * i,
                 screen_image.data_.data() + bytes_per_line *
                 (screen_image.height_ - i - 1), bytes_per_line);
@@ -245,11 +245,11 @@ std::shared_ptr<Image> Visualizer::CaptureDepthFloatBuffer(
     // reading glReadPixels().
     std::vector<float> float_buffer(depth_image.height_);
     float *p = (float *)depth_image.data_.data();
-    for (int j = 0; j < depth_image.width_; j++) {
+    for (int32_t j = 0; j < depth_image.width_; j++) {
         glReadPixels(j, 0, 1, depth_image.width_,
                 GL_DEPTH_COMPONENT, GL_FLOAT,
                 float_buffer.data());
-        for (int i = 0; i < depth_image.height_; i++) {
+        for (int32_t i = 0; i < depth_image.height_; i++) {
             p[i * depth_image.width_ + j] = float_buffer[i];
         }
     }
@@ -267,19 +267,19 @@ std::shared_ptr<Image> Visualizer::CaptureDepthFloatBuffer(
 
     image_ptr->PrepareImage(view_control_ptr_->GetWindowWidth(),
             view_control_ptr_->GetWindowHeight(), 1, 4);
-    for (int i = 0; i < depth_image.height_; i++) {
+    for (int32_t i = 0; i < depth_image.height_; i++) {
         float *p_depth = (float *)(depth_image.data_.data() +
                 depth_image.BytesPerLine() * (depth_image.height_ - i - 1));
         float *p_image = (float *)(image_ptr->data_.data() +
                 image_ptr->BytesPerLine() * i);
-        for (int j = 0; j < depth_image.width_; j++) {
+        for (int32_t j = 0; j < depth_image.width_; j++) {
             if (p_depth[j] == 1.0) {
                 continue;
             }
             double z_depth = 2.0 * z_near * z_far /
                     (z_far + z_near - (2.0 * (double)p_depth[j] - 1.0) *
                     (z_far - z_near));
-            p_image[j] = (float)z_depth;
+            p_image[j] = static_cast<float>(z_depth);
         }
     }
     return image_ptr;
@@ -317,11 +317,11 @@ void Visualizer::CaptureDepthImage(const std::string &filename/* = ""*/,
     // reading glReadPixels().
     std::vector<float> float_buffer(depth_image.height_);
     float *p = (float *)depth_image.data_.data();
-    for (int j = 0; j < depth_image.width_; j++) {
+    for (int32_t j = 0; j < depth_image.width_; j++) {
         glReadPixels(j, 0, 1, depth_image.width_,
                 GL_DEPTH_COMPONENT, GL_FLOAT,
                 float_buffer.data());
-        for (int i = 0; i < depth_image.height_; i++) {
+        for (int32_t i = 0; i < depth_image.height_; i++) {
             p[i * depth_image.width_ + j] = float_buffer[i];
         }
     }
@@ -339,12 +339,12 @@ void Visualizer::CaptureDepthImage(const std::string &filename/* = ""*/,
 
     png_image.PrepareImage(view_control_ptr_->GetWindowWidth(),
             view_control_ptr_->GetWindowHeight(), 1, 2);
-    for (int i = 0; i < depth_image.height_; i++) {
+    for (int32_t i = 0; i < depth_image.height_; i++) {
         float *p_depth = (float *)(depth_image.data_.data() +
                 depth_image.BytesPerLine() * (depth_image.height_ - i - 1));
         uint16_t *p_png = (uint16_t *)(png_image.data_.data() +
                 png_image.BytesPerLine() * i);
-        for (int j = 0; j < depth_image.width_; j++) {
+        for (int32_t j = 0; j < depth_image.width_; j++) {
             if (p_depth[j] == 1.0) {
                 continue;
             }
@@ -401,11 +401,11 @@ void Visualizer::CaptureDepthPointCloud(const std::string &filename/* = ""*/,
     // reading glReadPixels().
     std::vector<float> float_buffer(depth_image.height_);
     float *p = (float *)depth_image.data_.data();
-    for (int j = 0; j < depth_image.width_; j++) {
+    for (int32_t j = 0; j < depth_image.width_; j++) {
         glReadPixels(j, 0, 1, depth_image.width_,
                 GL_DEPTH_COMPONENT, GL_FLOAT,
                 float_buffer.data());
-        for (int i = 0; i < depth_image.height_; i++) {
+        for (int32_t i = 0; i < depth_image.height_; i++) {
             p[i * depth_image.width_ + j] = float_buffer[i];
         }
     }
@@ -426,10 +426,10 @@ void Visualizer::CaptureDepthPointCloud(const std::string &filename/* = ""*/,
     // glReadPixels get the screen in a vertically flipped manner
     // We should flip it back, and convert it to the correct depth value
     PointCloud depth_pointcloud;
-    for (int i = 0; i < depth_image.height_; i++) {
+    for (int32_t i = 0; i < depth_image.height_; i++) {
         float *p_depth = (float *)(depth_image.data_.data() +
                 depth_image.BytesPerLine() * i);
-        for (int j = 0; j < depth_image.width_; j++) {
+        for (int32_t j = 0; j < depth_image.width_; j++) {
             if (p_depth[j] == 1.0) {
                 continue;
             }

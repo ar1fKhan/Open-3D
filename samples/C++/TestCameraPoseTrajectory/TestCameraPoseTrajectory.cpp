@@ -33,7 +33,7 @@
 #include <Open3D/IO/IO.h>
 #include <Open3D/Visualization/Visualization.h>
 
-int main(int argc, char *argv[])
+int32_t main(int32_t argc, char *argv[])
 {
     using namespace open3d;
     SetVerbosityLevel(VerbosityLevel::VerboseAlways);
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
         PrintInfo("> TestCameraPoseTrajectory trajectory_file pcds_dir\n");
         return 0;
     }
-    const int NUM_OF_COLOR_PALETTE = 5;
+    const int32_t NUM_OF_COLOR_PALETTE = 5;
     Eigen::Vector3d color_palette[NUM_OF_COLOR_PALETTE] = {
         Eigen::Vector3d(255, 180, 0) / 255.0,
         Eigen::Vector3d(0, 166, 237) / 255.0,
@@ -56,12 +56,12 @@ int main(int argc, char *argv[])
     std::vector<std::shared_ptr<const Geometry>> pcds;
     for (size_t i = 0; i < trajectory.extrinsic_.size(); i++) {
         char buff[DEFAULT_IO_BUFFER_SIZE];
-        sprintf(buff, "%scloud_bin_%d.pcd", argv[2], (int)i);
+        sprintf(buff, "%scloud_bin_%d.pcd", argv[2], static_cast<int32_t>(i));
         if (filesystem::FileExists(buff)) {
             auto pcd = CreatePointCloudFromFile(buff);
             pcd->Transform(trajectory.extrinsic_[i]);
             pcd->colors_.clear();
-            if ((int)i < NUM_OF_COLOR_PALETTE) {
+            if (static_cast<int32_t>(i) < NUM_OF_COLOR_PALETTE) {
                 pcd->colors_.resize(pcd->points_.size(),
                         color_palette[i]);
             } else {

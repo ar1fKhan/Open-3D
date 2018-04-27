@@ -39,7 +39,7 @@ class PointCloud;
 class Feature
 {
 public:
-    void Resize(int dim, int n) { data_.resize(dim, n); data_.setZero(); }
+    void Resize(size_t dim, size_t n) { data_.resize(dim, n); data_.setZero(); }
     size_t Dimension() const { return data_.rows(); }
     size_t Num() const { return data_.cols(); }
 

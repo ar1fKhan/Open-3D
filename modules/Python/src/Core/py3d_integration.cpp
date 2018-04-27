@@ -78,10 +78,10 @@ void pybind_integration(py::module &m)
     py::detail::bind_copy_functions<UniformTSDFVolume>(
             uniform_tsdfvolume);
     uniform_tsdfvolume
-        .def(py::init([](double length, int resolution,
+        .def(py::init([](double length, uint32_t resolution,
                 double sdf_trunc, bool with_color) {
-            return new UniformTSDFVolume(
-                    length, resolution, sdf_trunc, with_color);
+            return std::unique_ptr<UniformTSDFVolume>(new UniformTSDFVolume(
+                    length, resolution, sdf_trunc, with_color));
         }), "length"_a, "resolution"_a, "sdf_trunc"_a, "with_color"_a)
         .def("__repr__", [](const UniformTSDFVolume &vol) {
             return std::string("UniformTSDFVolume ") +
@@ -98,9 +98,9 @@ void pybind_integration(py::module &m)
             scalable_tsdfvolume);
     scalable_tsdfvolume
         .def(py::init([](double voxel_length, double sdf_trunc, bool with_color,
-                int volume_unit_resolution, int depth_sampling_stride) {
-            return new ScalableTSDFVolume(voxel_length, sdf_trunc,
-                with_color, volume_unit_resolution, depth_sampling_stride);
+                int32_t volume_unit_resolution, int32_t depth_sampling_stride) {
+            return std::unique_ptr<ScalableTSDFVolume>(new ScalableTSDFVolume(voxel_length, sdf_trunc,
+                with_color, volume_unit_resolution, depth_sampling_stride));
         }), "voxel_length"_a, "sdf_trunc"_a, "with_color"_a,
                 "volume_unit_resolution"_a = 16, "depth_sampling_stride"_a = 4)
         .def("__repr__", [](const ScalableTSDFVolume &vol) {

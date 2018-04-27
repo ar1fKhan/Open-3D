@@ -36,7 +36,7 @@ class OdometryOption
 public:
     OdometryOption(
             double minimum_correspondence_ratio = 0.1,
-            const std::vector<int> &iteration_number_per_pyramid_level =
+            const std::vector<size_t> &iteration_number_per_pyramid_level =
             { 20, 10, 5 } /* {smaller image size to original image size} */,
             double max_depth_diff = 0.03,
             double min_depth = 0.0,
@@ -50,7 +50,7 @@ public:
 
 public:
     double minimum_correspondence_ratio_;
-    std::vector<int> iteration_number_per_pyramid_level_;
+    std::vector<size_t> iteration_number_per_pyramid_level_;
     double max_depth_diff_;
     double min_depth_;
     double max_depth_;

@@ -61,7 +61,7 @@ public:
     bool IsEmpty() const override;
     Eigen::Vector2d GetMinBound() const final;
     Eigen::Vector2d GetMaxBound() const final;
-    void FillPolygon(int width, int height);
+    void FillPolygon(int32_t width, int32_t height);
     std::shared_ptr<PointCloud> CropPointCloud(
             const PointCloud &input, const ViewControl &view);
     std::shared_ptr<SelectionPolygonVolume> CreateSelectionPolygonVolume(

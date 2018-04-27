@@ -40,7 +40,7 @@
 namespace py = pybind11;
 using namespace py::literals;
 
-PYBIND11_MAKE_OPAQUE(std::vector<int>);
+PYBIND11_MAKE_OPAQUE(std::vector<int32_t>);
 PYBIND11_MAKE_OPAQUE(std::vector<double>);
 PYBIND11_MAKE_OPAQUE(std::vector<Eigen::Vector3d>);
 PYBIND11_MAKE_OPAQUE(std::vector<Eigen::Vector3i>);
@@ -56,14 +56,14 @@ namespace detail {
 template <typename T, typename Class_>
 void bind_default_constructor(Class_ &cl) {
     cl.def(py::init([]() {
-        return new T();
+        return std::unique_ptr<T>(new T());
     }), "Default constructor");
 }
 
 template <typename T, typename Class_>
 void bind_copy_functions(Class_ &cl) {
     cl.def(py::init([](const T &cp) {
-        return new T(cp);
+        return std::unique_ptr<T>(new T(cp));
     }), "Copy constructor");
     cl.def("__copy__", [](T &v) {
         return T(v);

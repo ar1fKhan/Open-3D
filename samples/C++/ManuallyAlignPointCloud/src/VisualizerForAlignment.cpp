@@ -58,8 +58,8 @@ bool VisualizerForAlignment::AddSourceAndTarget(
     return AddGeometry(source_copy_ptr_) && AddGeometry(target_copy_ptr_);
 }
 
-void VisualizerForAlignment::KeyPressCallback(GLFWwindow *window, int key,
-        int scancode, int action, int mods)
+void VisualizerForAlignment::KeyPressCallback(GLFWwindow *window, int32_t key,
+        int32_t scancode, int32_t action, int32_t mods)
 {
     if (action == GLFW_PRESS && (mods & GLFW_MOD_CONTROL)) {
         const char *filename;
@@ -262,7 +262,7 @@ bool VisualizerForAlignment::AlignWithManualAnnotation()
     if (source_idx.empty() || target_idx.empty() ||
             source_idx.size() != target_idx.size()) {
         PrintWarning("# of picked points mismatch: %d in source, %d in target.\n",
-                (int)source_idx.size(), (int)target_idx.size());
+                static_cast<int32_t>(source_idx.size()), static_cast<int32_t>(target_idx.size()));
         return false;
     }
     TransformationEstimationPointToPoint p2p(with_scaling_);

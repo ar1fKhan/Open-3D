@@ -50,7 +50,7 @@ bool ReadPinholeCameraTrajectoryFromLOG(const std::string &filename,
         return false;
     }
     char line_buffer[DEFAULT_IO_BUFFER_SIZE];
-    int i, j, k;
+    int32_t i, j, k;
     Eigen::Matrix4d trans;
     while (fgets(line_buffer, DEFAULT_IO_BUFFER_SIZE, f)) {
         if (strlen(line_buffer) > 0 && line_buffer[0] != '#') {
@@ -108,7 +108,7 @@ bool WritePinholeCameraTrajectoryToLOG(const std::string &filename,
     }
     for (size_t i = 0; i < trajectory.extrinsic_.size(); i++ ) {
         const auto &trans = trajectory.extrinsic_[i];
-        fprintf(f, "%d %d %d\n", (int)i, (int)i, (int)i + 1);
+        fprintf(f, "%zu %zu %zu\n", i, i, i + 1);
         fprintf(f, "%.8f %.8f %.8f %.8f\n", trans(0,0), trans(0,1), trans(0,2),
                 trans(0,3) );
         fprintf(f, "%.8f %.8f %.8f %.8f\n", trans(1,0), trans(1,1), trans(1,2),

@@ -39,7 +39,7 @@ void PrintPointCloud(const open3d::PointCloud &pointcloud)
 
     bool pointcloud_has_normal = pointcloud.HasNormals();
     PrintInfo("Pointcloud has %d points.\n",
-            (int)pointcloud.points_.size());
+            static_cast<int32_t>(pointcloud.points_.size()));
 
     Eigen::Vector3d min_bound = pointcloud.GetMinBound();
     Eigen::Vector3d max_bound = pointcloud.GetMaxBound();
@@ -62,7 +62,7 @@ void PrintPointCloud(const open3d::PointCloud &pointcloud)
     PrintDebug("End of the list.\n\n");
 }
 
-int main(int argc, char *argv[])
+int32_t main(int32_t argc, char *argv[])
 {
     using namespace open3d;
 
@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
     auto pcd = CreatePointCloudFromFile(argv[1]);
     {
         ScopeTimer timer("FPFH estimation with Radius 0.25");
-        //for (int i = 0; i < 20; i++) {
+        //for (int32_t i = 0; i < 20; i++) {
             ComputeFPFHFeature(*pcd,
                     open3d::KDTreeSearchParamRadius(0.25));
         //}
@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 
     {
         ScopeTimer timer("Normal estimation with KNN20");
-        for (int i = 0; i < 20; i++) {
+        for (int32_t i = 0; i < 20; i++) {
             EstimateNormals(*pcd,
                     open3d::KDTreeSearchParamKNN(20));
         }
@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
 
     {
         ScopeTimer timer("Normal estimation with Radius 0.01666");
-        for (int i = 0; i < 20; i++) {
+        for (int32_t i = 0; i < 20; i++) {
             EstimateNormals(*pcd,
                     open3d::KDTreeSearchParamRadius(0.01666));
         }
@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
 
     {
         ScopeTimer timer("Normal estimation with Hybrid 0.01666, 60");
-        for (int i = 0; i < 20; i++) {
+        for (int32_t i = 0; i < 20; i++) {
             EstimateNormals(*pcd,
                     open3d::KDTreeSearchParamHybrid(0.01666, 60));
         }

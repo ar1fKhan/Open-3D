@@ -83,13 +83,13 @@ std::shared_ptr<PointCloudForColoredICP>
     size_t n_points = output->points_.size();
     output->color_gradient_.resize(n_points, Eigen::Vector3d::Zero());
 
-    for (auto k = 0; k < n_points; k++) {
+    for (size_t k = 0; k < n_points; k++) {
         const Eigen::Vector3d &vt = output->points_[k];
         const Eigen::Vector3d &nt = output->normals_[k];
         double it = (output->colors_[k](0) + output->colors_[k](1)
                 + output->colors_[k](2)) / 3.0;
 
-        std::vector<int> point_idx;
+        std::vector<int32_t> point_idx;
         std::vector<double> point_squared_distance;
 
         if (tree.SearchHybrid(vt, search_param.radius_,
@@ -100,8 +100,8 @@ std::shared_ptr<PointCloudForColoredICP>
             Eigen::MatrixXd b(nn, 1);
             A.setZero();
             b.setZero();
-            for (auto i = 1; i < nn; i++) {
-                int P_adj_idx = point_idx[i];
+            for (size_t i = 1; i < nn; i++) {
+                int32_t P_adj_idx = point_idx[i];
                 Eigen::Vector3d vt_adj = output->points_[P_adj_idx];
                 Eigen::Vector3d vt_proj =
                         vt_adj - (vt_adj - vt).dot(nt) * nt;
@@ -147,10 +147,10 @@ Eigen::Matrix4d TransformationEstimationForColoredICP::ComputeTransformation(
     const auto &target_c = (const PointCloudForColoredICP &)target;
 
     auto compute_jacobian_and_residual = [&]
-            (int i, std::vector<Eigen::Vector6d> &J_r, std::vector<double> &r)
+            (size_t i, std::vector<Eigen::Vector6d> &J_r, std::vector<double> &r)
     {
-        size_t cs = corres[i][0];
-        size_t ct = corres[i][1];
+        uint32_t cs = corres[i][0];
+        uint32_t ct = corres[i][1];
         const Eigen::Vector3d &vs = source.points_[cs];
         const Eigen::Vector3d &vt = target.points_[ct];
         const Eigen::Vector3d &nt = target.normals_[ct];
@@ -185,7 +185,7 @@ Eigen::Matrix4d TransformationEstimationForColoredICP::ComputeTransformation(
     Eigen::Matrix6d JTJ;
     Eigen::Vector6d JTr;
     std::tie(JTJ, JTr) = ComputeJTJandJTr<Eigen::Matrix6d, Eigen::Vector6d>(
-            compute_jacobian_and_residual, (int)corres.size());
+            compute_jacobian_and_residual, corres.size());
 
     bool is_success;
     Eigen::Matrix4d extrinsic;
@@ -206,8 +206,8 @@ double TransformationEstimationForColoredICP::ComputeRMSE(
 
     double residual = 0.0;
     for (size_t i = 0; i < corres.size(); i++) {
-        size_t cs = corres[i][0];
-        size_t ct = corres[i][1];
+        uint32_t cs = corres[i][0];
+        uint32_t ct = corres[i][1];
         const Eigen::Vector3d &vs = source.points_[cs];
         const Eigen::Vector3d &vt = target.points_[ct];
         const Eigen::Vector3d &nt = target.normals_[ct];

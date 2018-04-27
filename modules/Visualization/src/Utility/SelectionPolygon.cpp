@@ -74,7 +74,7 @@ Eigen::Vector2d SelectionPolygon::GetMaxBound() const
     return Eigen::Vector2d((*itr_x)(0), (*itr_y)(1));
 }
 
-void SelectionPolygon::FillPolygon(int width, int height)
+void SelectionPolygon::FillPolygon(int32_t width, int32_t height)
 {
     // Standard scan conversion code. See reference:
     // http://alienryderflex.com/polygon_fill/
@@ -83,14 +83,14 @@ void SelectionPolygon::FillPolygon(int width, int height)
     polygon_interior_mask_.PrepareImage(width, height, 1, 1);
     std::fill(polygon_interior_mask_.data_.begin(),
             polygon_interior_mask_.data_.end(), 0);
-    std::vector<int> nodes;
-    for (int y = 0; y < height; y++) {
+    std::vector<int32_t> nodes;
+    for (int32_t y = 0; y < height; y++) {
         nodes.clear();
         for (size_t i = 0; i < polygon_.size(); i++) {
             size_t j = (i + 1) % polygon_.size();
             if ((polygon_[i](1) < y && polygon_[j](1) >= y) ||
                     (polygon_[j](1) < y && polygon_[i](1) >= y)) {
-                nodes.push_back((int)(polygon_[i](0) + (y - polygon_[i](1)) /
+                nodes.push_back(static_cast<int32_t>(polygon_[i](0) + (y - polygon_[i](1)) /
                         (polygon_[j](1) - polygon_[i](1)) * (polygon_[j](0) -
                         polygon_[i](0)) + 0.5));
             }
@@ -103,7 +103,7 @@ void SelectionPolygon::FillPolygon(int width, int height)
             if (nodes[i + 1] > 0) {
                 if (nodes[i] < 0) nodes[i] = 0;
                 if (nodes[i + 1] > width) nodes[i + 1] = width;
-                for (int x = nodes[i]; x < nodes[i + 1]; x++) {
+                for (int32_t x = nodes[i]; x < nodes[i + 1]; x++) {
                     polygon_interior_mask_.data_[x + y * width] = 1;
                 }
             }
@@ -137,7 +137,7 @@ std::shared_ptr<SelectionPolygonVolume> SelectionPolygon::
             ViewControlWithEditing::FreeMode) {
         return volume;
     }
-    int idx = 0;
+    int32_t idx = 0;
     switch (editing_view.GetEditingMode()) {
     case ViewControlWithEditing::OrthoNegativeX:
     case ViewControlWithEditing::OrthoPositiveX:

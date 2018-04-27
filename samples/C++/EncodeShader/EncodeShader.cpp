@@ -90,7 +90,7 @@ void WriteStringFooter(FILE *file)
     fprintf(file, "\n");
 }
 
-int main(int argc, char **args)
+int32_t main(int32_t argc, char **args)
 {
     if (argc <= 1) {
         PrintHelp();

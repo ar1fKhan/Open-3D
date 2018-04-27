@@ -156,12 +156,12 @@ void PhongShader::SetLighting(const ViewControl &view,
     const auto &box = view.GetBoundingBox();
     light_position_world_data_.setOnes();
     light_color_data_.setOnes();
-    for (int i = 0; i < 4; i++) {
+    for (int32_t i = 0; i < 4; i++) {
         light_position_world_data_.block<3, 1>(0, i) =
-                box.GetCenter().cast<GLfloat>() + (float)box.GetSize() * (
-                (float)option.light_position_relative_[i](0) * view.GetRight() +
-                (float)option.light_position_relative_[i](1) * view.GetUp() +
-                (float)option.light_position_relative_[i](2) * view.GetFront());
+                box.GetCenter().cast<GLfloat>() + static_cast<float>(box.GetSize()) * (
+                static_cast<float>(option.light_position_relative_[i](0)) * view.GetRight() +
+                static_cast<float>(option.light_position_relative_[i](1)) * view.GetUp() +
+                static_cast<float>(option.light_position_relative_[i](2)) * view.GetFront());
         light_color_data_.block<3, 1>(0, i) =
                 option.light_color_[i].cast<GLfloat>();
     }
@@ -316,7 +316,7 @@ bool PhongShaderForTriangleMesh::PrepareBinding(const Geometry &geometry,
         const auto &triangle = mesh.triangles_[i];
         for (size_t j = 0; j < 3; j++) {
             size_t idx = i * 3 + j;
-            size_t vi = triangle(j);
+            Eigen::Vector3i::Scalar vi = triangle(j);
             const auto &vertex = mesh.vertices_[vi];
             points[idx] = vertex.cast<float>();
 

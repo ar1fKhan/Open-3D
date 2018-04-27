@@ -117,8 +117,8 @@ std::tuple<bool, std::vector<Eigen::Matrix4d>>
     std::tie(solution_exist, x) = SolveLinearSystem(JTJ, JTr);
 
     if (solution_exist) {
-        int nposes = (int)x.rows() / 6;
-        for (int i = 0; i < nposes; i++) {
+        Eigen::Index nposes = x.rows() / 6;
+        for (int32_t i = 0; i < nposes; i++) {
             Eigen::Matrix4d extrinsic = TransformVector6dToMatrix4d(
                     x.block<6, 1>(i * 6, 0));
             output_matrix_array.push_back(extrinsic);
@@ -132,8 +132,8 @@ std::tuple<bool, std::vector<Eigen::Matrix4d>>
 
 template<typename MatType, typename VecType>
 std::tuple<MatType, VecType> ComputeJTJandJTr(
-        std::function<void(int, VecType &, double &)> f,
-        int iteration_num)
+        std::function<void(size_t, VecType &, double &)> f,
+        size_t iteration_num)
 {
     MatType JTJ;
     VecType JTr;
@@ -154,7 +154,7 @@ std::tuple<MatType, VecType> ComputeJTJandJTr(
 #ifdef _OPENMP
 #pragma omp for nowait
 #endif
-        for (int i = 0; i < iteration_num; i++) {
+        for (int32_t i = 0; i < static_cast<int32_t>(iteration_num); i++) {
             f(i, J_r, r);
             JTJ_private.noalias() += J_r * J_r.transpose();
             JTr_private.noalias() += J_r * r;
@@ -179,8 +179,8 @@ std::tuple<MatType, VecType> ComputeJTJandJTr(
 
 template<typename MatType, typename VecType>
 std::tuple<MatType, VecType> ComputeJTJandJTr(
-        std::function<void(int, std::vector<VecType> &, std::vector<double> &)> f,
-        int iteration_num)
+        std::function<void(size_t, std::vector<VecType> &, std::vector<double> &)> f,
+        size_t iteration_num)
 {
     MatType JTJ;
     VecType JTr;
@@ -201,9 +201,9 @@ std::tuple<MatType, VecType> ComputeJTJandJTr(
 #ifdef _OPENMP
 #pragma omp for nowait
 #endif
-        for (int i = 0; i < iteration_num; i++) {
+        for (int32_t i = 0; i < static_cast<int32_t>(iteration_num); i++) {
             f(i, J_r, r);
-            for (int j = 0; j < (int)r.size(); j++) {
+            for (size_t j = 0; j < r.size(); j++) {
                 JTJ_private.noalias() += J_r[j] * J_r[j].transpose();
                 JTr_private.noalias() += J_r[j] * r[j];
                 r2_sum_private += r[j] * r[j];
@@ -227,11 +227,11 @@ std::tuple<MatType, VecType> ComputeJTJandJTr(
 }
 
 template std::tuple<Eigen::Matrix6d, Eigen::Vector6d> ComputeJTJandJTr(
-        std::function<void(int, Eigen::Vector6d &, double &)> f,
-        int iteration_num);
+        std::function<void(size_t, Eigen::Vector6d &, double &)> f,
+        size_t iteration_num);
 
 template std::tuple<Eigen::Matrix6d, Eigen::Vector6d> ComputeJTJandJTr(
-        std::function<void(int, std::vector<Eigen::Vector6d> &,
-        std::vector<double> &)> f, int iteration_num);
+        std::function<void(size_t, std::vector<Eigen::Vector6d> &,
+        std::vector<double> &)> f, size_t iteration_num);
 
 }   // namespace open3d

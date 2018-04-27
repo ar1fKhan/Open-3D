@@ -39,7 +39,7 @@ class PointCloud;
 class LineSet : public Geometry3D
 {
 public:
-    typedef std::pair<int, int> LineSegment;
+    typedef std::pair<size_t, size_t> LineSegment;
 
 public:
     LineSet() : Geometry3D(Geometry::GeometryType::LineSet) {}
@@ -85,6 +85,6 @@ public:
 /// correspondence set (LineSetFactory.cpp)
 std::shared_ptr<LineSet> CreateLineSetFromPointCloudCorrespondences(
         const PointCloud &cloud0, const PointCloud &cloud1,
-        const std::vector<std::pair<int, int>> &correspondences);
+        const std::vector<std::pair<size_t, size_t>> &correspondences);
 
 }   // namespace open3d

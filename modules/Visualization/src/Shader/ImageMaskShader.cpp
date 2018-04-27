@@ -175,7 +175,7 @@ bool ImageMaskShaderForImage::PrepareRendering(const Geometry &geometry,
     }
     const auto &_option = (RenderOptionWithEditing &)option;
     mask_color_data_ = _option.selection_polygon_mask_color_.cast<float>();
-    mask_alpha_data_ = (float)_option.selection_polygon_mask_alpha_;
+    mask_alpha_data_ = static_cast<float>(_option.selection_polygon_mask_alpha_);
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -201,7 +201,7 @@ bool ImageMaskShaderForImage::PrepareBinding(const Geometry &geometry,
         return false;
     }
     render_image.PrepareImage(image.width_, image.height_, 1, 1);
-    for (int i = 0; i < image.height_ * image.width_; i++) {
+    for (int32_t i = 0; i < image.height_ * image.width_; i++) {
         render_image.data_[i] = (image.data_[i] != 0) * 255;
     }
     draw_arrays_mode_ = GL_TRIANGLES;

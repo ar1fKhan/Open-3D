@@ -74,7 +74,7 @@ bool SelectionPolygonVolume::ConvertFromJsonValue(const Json::Value &value)
         return false;
     }
     bounding_polygon_.resize(polygon_array.size());
-    for (int i = 0; i < (int)polygon_array.size(); i++) {
+    for (Json::ArrayIndex i = 0; i < static_cast<Json::ArrayIndex>(polygon_array.size()); i++) {
         const Json::Value &point_object = polygon_array[i];
         if (EigenVector3dFromJsonArray(bounding_polygon_[i], point_object) ==
                 false) {
@@ -102,7 +102,7 @@ std::vector<size_t> SelectionPolygonVolume::CropInPolygon(
         const std::vector<Eigen::Vector3d> &input) const
 {
     std::vector<size_t> output_index;
-    int u, v, w;
+    int32_t u, v, w;
     if (orthogonal_axis_ == "x" || orthogonal_axis_ == "X") {
         u = 1; v = 2; w = 0;
     } else if (orthogonal_axis_ == "y" || orthogonal_axis_ == "Y") {

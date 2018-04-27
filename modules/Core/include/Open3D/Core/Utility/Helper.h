@@ -31,6 +31,7 @@
 #include <functional>
 #include <vector>
 #include <string>
+#include <Eigen/Core>
 
 namespace open3d {
 
@@ -56,12 +57,12 @@ struct hash
 namespace {
 
 template <class T>
-inline void hash_combine(std::size_t& seed, T const& v)
+inline void hash_combine(size_t& seed, T const& v)
 {
     seed ^= hash_tuple::hash<T>()(v) + 0x9e3779b9 + (seed<<6) + (seed>>2);
 }
 
-template <class Tuple, size_t Index = std::tuple_size<Tuple>::value - 1>
+template <class Tuple, uint32_t Index = std::tuple_size<Tuple>::value - 1>
 struct HashValueImpl
 {
     static void apply(size_t& seed, Tuple const& tuple)
@@ -99,9 +100,9 @@ namespace hash_eigen {
 
 template <typename T>
 struct hash : std::unary_function<T, size_t> {
-    std::size_t operator()(T const& matrix) const {
+    size_t operator()(T const& matrix) const {
         size_t seed = 0;
-        for (int i = 0; i < (int)matrix.size(); i++) {
+        for (Eigen::Index i = 0; i < matrix.size(); i++) {
             auto elem = *(matrix.data() + i);
             seed ^= std::hash<typename T::Scalar>()(elem) + 0x9e3779b9 +
                     (seed << 6) + (seed >> 2);

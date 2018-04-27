@@ -218,7 +218,7 @@ bool NormalShaderForTriangleMesh::PrepareBinding(const Geometry &geometry,
         const auto &triangle = mesh.triangles_[i];
         for (size_t j = 0; j < 3; j++) {
             size_t idx = i * 3 + j;
-            size_t vi = triangle(j);
+            Eigen::Vector3i::Scalar vi = triangle(j);
             const auto &vertex = mesh.vertices_[vi];
             points[idx] = vertex.cast<float>();
             if (option.mesh_shade_option_ ==

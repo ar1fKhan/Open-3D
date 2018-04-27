@@ -41,7 +41,7 @@ bool ReadPointCloudFromPTS(const std::string &filename, PointCloud &pointcloud)
         return false;
     }
     char line_buffer[DEFAULT_IO_BUFFER_SIZE];
-    int num_of_pts = 0, num_of_fields = 0;
+    int32_t num_of_pts = 0, num_of_fields = 0;
     if (fgets(line_buffer, DEFAULT_IO_BUFFER_SIZE, file)) {
         sscanf(line_buffer, "%d", &num_of_pts);
     }
@@ -51,13 +51,13 @@ bool ReadPointCloudFromPTS(const std::string &filename, PointCloud &pointcloud)
         return false;
     }
     ResetConsoleProgress(num_of_pts, "Reading PTS: ");
-    int idx = 0;
+    int32_t idx = 0;
     while (idx < num_of_pts && fgets(line_buffer, DEFAULT_IO_BUFFER_SIZE,
             file)) {
         if (num_of_fields == 0) {
             std::vector<std::string> st;
             SplitString(st, line_buffer, " ");
-            num_of_fields = (int)st.size();
+            num_of_fields = static_cast<int32_t>(st.size());
             if (num_of_fields < 3) {
                 PrintWarning("Read PTS failed: insufficient data fields.\n");
                 fclose(file);
@@ -70,7 +70,7 @@ bool ReadPointCloudFromPTS(const std::string &filename, PointCloud &pointcloud)
             }
         }
         double x, y, z;
-        int i, r, g, b;
+        int32_t i, r, g, b;
         if (num_of_fields < 7) {
             if (sscanf(line_buffer, "%lf %lf %lf", &x, &y, &z) == 3) {
                 pointcloud.points_[idx] = Eigen::Vector3d(x, y, z);
@@ -98,8 +98,8 @@ bool WritePointCloudToPTS(const std::string &filename,
         PrintWarning("Write PTS failed: unable to open file.\n");
         return false;
     }
-    fprintf(file, "%d\r\n", (int)pointcloud.points_.size());
-    ResetConsoleProgress(static_cast<int>(pointcloud.points_.size()),
+    fprintf(file, "%d\r\n", static_cast<int32_t>(pointcloud.points_.size()));
+    ResetConsoleProgress(static_cast<int32_t>(pointcloud.points_.size()),
             "Writinging PTS: ");
     for (size_t i = 0; i < pointcloud.points_.size(); i++) {
         const auto &point = pointcloud.points_[i];
@@ -109,8 +109,8 @@ bool WritePointCloudToPTS(const std::string &filename,
         } else {
             const auto &color = pointcloud.colors_[i] * 255.0;
             fprintf(file, "%.10f %.10f %.10f %d %d %d %d\r\n", point(0),
-                    point(1), point(2), 0, (int)color(0),
-                    (int)color(1), (int)(color(2)));
+                    point(1), point(2), 0, static_cast<int32_t>(color(0)),
+                    static_cast<int32_t>(color(1)), static_cast<int32_t>(color(2)));
         }
         AdvanceConsoleProgress();
     }

@@ -143,12 +143,12 @@ void ViewControlWithCustomAnimation::DeleteKeyFrame()
     SetViewControlFromTrajectory();
 }
 
-void ViewControlWithCustomAnimation::AddSpinKeyFrames(int num_of_key_frames
+void ViewControlWithCustomAnimation::AddSpinKeyFrames(int32_t num_of_key_frames
         /* = 20*/)
 {
     if (animation_mode_ == AnimationMode::FreeMode) {
         double radian_per_step = M_PI * 2.0 / double(num_of_key_frames);
-        for (int i = 0; i < num_of_key_frames; i++) {
+        for (int32_t i = 0; i < num_of_key_frames; i++) {
             ViewControl::Rotate(radian_per_step / ROTATION_RADIAN_PER_PIXEL, 0);
             AddKeyFrame();
         }
@@ -174,18 +174,18 @@ std::string ViewControlWithCustomAnimation::GetStatusString() const
         if (view_trajectory_.view_status_.empty()) {
             sprintf(buffer, "empty trajectory");
         } else {
-            sprintf(buffer, "#%u keyframe (%u in total%s)",
-                    (unsigned int)CurrentKeyframe() + 1,
-                    (unsigned int)view_trajectory_.view_status_.size(),
+            sprintf(buffer, "#%zu keyframe (%zu in total%s)",
+                    CurrentKeyframe() + 1,
+                    view_trajectory_.view_status_.size(),
                     view_trajectory_.is_loop_ ? ", looped" : "");
         }
     } else {
         if (view_trajectory_.view_status_.empty()) {
             sprintf(buffer, "empty trajectory");
         } else {
-            sprintf(buffer, "#%u frame (%u in total%s)",
-                    (unsigned int)CurrentFrame() + 1,
-                    (unsigned int)view_trajectory_.NumOfFrames(),
+            sprintf(buffer, "#%zu frame (%zu in total%s)",
+                    CurrentFrame() + 1,
+                    view_trajectory_.NumOfFrames(),
                     view_trajectory_.is_loop_ ? ", looped" : "");
         }
     }
@@ -318,10 +318,10 @@ double ViewControlWithCustomAnimation::RegularizeFrameIndex(
     }
     double frame_index = current_frame;
     if (is_loop) {
-        while (int(round(frame_index)) < 0) {
+        while (static_cast<int32_t>(round(frame_index)) < 0) {
             frame_index += double(num_of_frames);
         }
-        while (int(round(frame_index)) >= int(num_of_frames)) {
+        while (static_cast<int32_t>(round(frame_index)) >= static_cast<int32_t>(num_of_frames)) {
             frame_index -= double(num_of_frames);
         }
     } else {

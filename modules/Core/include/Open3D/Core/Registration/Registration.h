@@ -48,7 +48,7 @@ class ICPConvergenceCriteria
 {
 public:
     ICPConvergenceCriteria(double relative_fitness = 1e-6,
-            double relative_rmse = 1e-6, int max_iteration = 30) :
+            double relative_rmse = 1e-6, uint32_t max_iteration = 30) :
             relative_fitness_(relative_fitness), relative_rmse_(relative_rmse),
             max_iteration_(max_iteration) {}
     ~ICPConvergenceCriteria() {}
@@ -56,7 +56,7 @@ public:
 public:
     double relative_fitness_;
     double relative_rmse_;
-    int max_iteration_;
+    uint32_t max_iteration_;
 };
 
 /// Class that defines the convergence criteria of RANSAC
@@ -68,14 +68,14 @@ public:
 class RANSACConvergenceCriteria
 {
 public:
-    RANSACConvergenceCriteria(int max_iteration = 1000,
-            int max_validation = 1000) :
+    RANSACConvergenceCriteria(uint32_t max_iteration = 1000,
+            uint32_t max_validation = 1000) :
             max_iteration_(max_iteration), max_validation_(max_validation) {}
     ~RANSACConvergenceCriteria() {}
 
 public:
-    int max_iteration_;
-    int max_validation_;
+    uint32_t max_iteration_;
+    uint32_t max_validation_;
 };
 
 /// Class that contains the registration result
@@ -114,7 +114,7 @@ RegistrationResult RegistrationRANSACBasedOnCorrespondence(
         const CorrespondenceSet &corres, double max_correspondence_distance,
         const TransformationEstimation &estimation =
         TransformationEstimationPointToPoint(false),
-        int ransac_n = 6, const RANSACConvergenceCriteria &criteria =
+        size_t ransac_n = 6, const RANSACConvergenceCriteria &criteria =
         RANSACConvergenceCriteria());
 
 /// Function for global RANSAC registration based on feature matching
@@ -124,7 +124,7 @@ RegistrationResult RegistrationRANSACBasedOnFeatureMatching(
         double max_correspondence_distance,
         const TransformationEstimation &estimation =
         TransformationEstimationPointToPoint(false),
-        int ransac_n = 4,
+        size_t ransac_n = 4,
         const std::vector<std::reference_wrapper<const CorrespondenceChecker>> &
         checkers = {}, const RANSACConvergenceCriteria &criteria =
         RANSACConvergenceCriteria());

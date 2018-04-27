@@ -64,8 +64,8 @@ private:
 class FPSTimer : public Timer
 {
 public:
-    FPSTimer(const std::string &fps_timer_info = "", int expectation = -1,
-            double time_to_print = 3000.0, int events_to_print = 100);
+    FPSTimer(const std::string &fps_timer_info = "", int32_t expectation = -1,
+            double time_to_print = 3000.0, int32_t events_to_print = 100);
 
     /// Function to signal an event
     /// It automatically prints FPS information when duration is more than
@@ -74,11 +74,11 @@ public:
 
 private:
     std::string fps_timer_info_;
-    int expectation_;
+    int32_t expectation_;
     double time_to_print_;
-    int events_to_print_;
-    int event_fragment_count_;
-    int event_total_count_;
+    int32_t events_to_print_;
+    int32_t event_fragment_count_;
+    int32_t event_total_count_;
 };
 
 }   // namespace open3d
