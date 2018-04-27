@@ -29,6 +29,6 @@
 
 namespace open3d {
 
-
+    void PinholeCameraTrajectoryFactory_elminate_empty_object_warning(void) {}
 
 }   // namespace open3d
